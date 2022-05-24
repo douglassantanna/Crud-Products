@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\dev\\crud-products\\services\\api\\api.csproj": {}
+    "c:\\dev\\products-web-app\\services\\api\\api.csproj": {}
   },
   "projects": {
-    "C:\\dev\\crud-products\\services\\api\\api.csproj": {
+    "c:\\dev\\products-web-app\\services\\api\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\crud-products\\services\\api\\api.csproj",
+        "projectUniqueName": "c:\\dev\\products-web-app\\services\\api\\api.csproj",
         "projectName": "api",
-        "projectPath": "C:\\dev\\crud-products\\services\\api\\api.csproj",
-        "packagesPath": "C:\\Users\\Douglas Santana\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\crud-products\\services\\api\\obj\\",
+        "projectPath": "c:\\dev\\products-web-app\\services\\api\\api.csproj",
+        "packagesPath": "C:\\Users\\santa\\.nuget\\packages\\",
+        "outputPath": "c:\\dev\\products-web-app\\services\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Douglas Santana\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\santa\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -40,6 +38,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
               "version": "[5.0.10, )"
