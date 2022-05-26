@@ -13,7 +13,7 @@ public class Item : Entity
     public double Price { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedWhen { get; private set; }
-    public void ChangeName(string name) => Name = name;
-    public void ChangePrice(double price) => Price = price;
+    public void UpdateName(string name) => Name = name;
+    public void UpdatePrice(double price) => Price = price;
     public void UpdatedAt() => UpdatedWhen = DateTime.UtcNow;
 }
