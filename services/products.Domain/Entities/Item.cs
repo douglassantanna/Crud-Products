@@ -8,6 +8,7 @@ public class Item : Entity
         Price = price;
         CreatedAt = DateTime.UtcNow;
     }
+    protected Item() { }
 
     public string Name { get; private set; }
     public double Price { get; private set; }

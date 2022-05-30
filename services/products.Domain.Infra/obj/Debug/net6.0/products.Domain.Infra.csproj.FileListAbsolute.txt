@@ -10,3 +10,6 @@ C:\dev\products-web-app\services\products.Domain.Infra\obj\Debug\net6.0\products
 C:\dev\products-web-app\services\products.Domain.Infra\obj\Debug\net6.0\refint\products.Domain.Infra.dll
 C:\dev\products-web-app\services\products.Domain.Infra\obj\Debug\net6.0\products.Domain.Infra.pdb
 C:\dev\products-web-app\services\products.Domain.Infra\obj\Debug\net6.0\ref\products.Domain.Infra.dll
+C:\dev\products-web-app\services\products.Domain.Infra\bin\Debug\net6.0\products.Domain.dll
+C:\dev\products-web-app\services\products.Domain.Infra\bin\Debug\net6.0\products.Domain.pdb
+C:\dev\products-web-app\services\products.Domain.Infra\obj\Debug\net6.0\products.Domain.Infra.csproj.CopyComplete

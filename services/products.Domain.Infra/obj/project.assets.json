@@ -133,6 +133,18 @@
           "lib/netstandard2.0/_._": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.InMemory/6.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.5"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/6.0.5": {
         "type": "package",
         "dependencies": {
@@ -633,8 +645,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1",
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.5"
+          "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1"
         },
         "compile": {
           "bin/placeholder/products.Domain.dll": {}
@@ -884,6 +895,20 @@
         "lib/netstandard2.0/_._",
         "microsoft.entityframeworkcore.analyzers.6.0.5.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/6.0.5": {
+      "sha512": "EkN5W28f18acApSn7uxglOXI6h98s7ahlh0T4+0TJ+dahO1dqhO1VwNXcjkfwxq1Oz1FZdR9HD0fAWTQjWU1Kw==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.inmemory/6.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "microsoft.entityframeworkcore.inmemory.6.0.5.nupkg.sha512",
+        "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/6.0.5": {
@@ -1859,37 +1884,40 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Microsoft.EntityFrameworkCore >= 6.0.5",
+      "Microsoft.EntityFrameworkCore.InMemory >= 6.0.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.5",
       "products.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\santa\\.nuget\\packages\\": {}
+    "C:\\Users\\DouglasCraici\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj",
+      "projectUniqueName": "C:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj",
       "projectName": "products.Domain.Infra",
-      "projectPath": "c:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj",
-      "packagesPath": "C:\\Users\\santa\\.nuget\\packages\\",
-      "outputPath": "c:\\dev\\products-web-app\\services\\products.Domain.Infra\\obj\\",
+      "projectPath": "C:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj",
+      "packagesPath": "C:\\Users\\DouglasCraici\\.nuget\\packages\\",
+      "outputPath": "C:\\dev\\products-web-app\\services\\products.Domain.Infra\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\santa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\DouglasCraici\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "c:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj": {
-              "projectPath": "c:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj"
+            "C:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj": {
+              "projectPath": "C:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj"
             }
           }
         }
@@ -1905,6 +1933,10 @@
         "targetAlias": "net6.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[6.0.5, )"
+          },
+          "Microsoft.EntityFrameworkCore.InMemory": {
             "target": "Package",
             "version": "[6.0.5, )"
           },
@@ -1928,7 +1960,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
