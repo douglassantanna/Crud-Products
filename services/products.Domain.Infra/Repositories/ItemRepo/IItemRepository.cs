@@ -7,8 +7,8 @@ namespace products.Domain.Infra.Repositories.ItemRepo;
 public interface IItemRepository
 {
     Task<List<Item>> GetAllAsync();
-    Task<Item> GetByIdAsync(int id);
+    Task<NotificationResult> GetByIdAsync(int id);
     Task<NotificationResult> CreateAsync(NewItem item);
-    Task<int> UpdateAsync(int id, Item item);
-    Task<int> DeleteAsync(int id);
+    Task<NotificationResult> UpdateAsync(int id, Item item);
+    Task<NotificationResult> DeleteAsync(int id);
 }

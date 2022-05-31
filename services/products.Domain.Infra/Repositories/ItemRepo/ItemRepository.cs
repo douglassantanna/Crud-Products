@@ -22,34 +22,34 @@ namespace products.Domain.Infra.Repositories.ItemRepo
             await _context.SaveChangesAsync();
             return new NotificationResult("", true, newItem);
         }
-
-        public async Task<int> DeleteAsync(int id)
-        {
-            var deletedItem = await _context.Itens.FirstOrDefaultAsync(x => x.Id == id);
-            _context.Itens.Remove(deletedItem);
-            await _context.SaveChangesAsync();
-            return deletedItem.Id;
-        }
-
         public async Task<List<Item>> GetAllAsync()
         {
             return await _context.Itens.ToListAsync();
         }
 
-        public async Task<Item> GetByIdAsync(int id)
+        public async Task<NotificationResult> GetByIdAsync(int id)
         {
-            return await _context.Itens.FirstOrDefaultAsync(x => x.Id == id);
+            var item = await _context.Itens.FirstOrDefaultAsync(x => x.Id == id);
+            if (item == null) return new NotificationResult("Item não encontrado", false);
+            return new NotificationResult("", true, item);
         }
-
-        public async Task<int> UpdateAsync(int id, Item item)
+        public async Task<NotificationResult> UpdateAsync(int id, Item item)
         {
             var updateItem = await _context.Itens.FirstOrDefaultAsync(x => x.Id == id);
+            if (updateItem == null) return new NotificationResult("Item não encontrado", false);
             updateItem.UpdateName(item.Name);
             updateItem.UpdatePrice(item.Price);
-
             _context.Entry(updateItem).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return updateItem.Id;
+            return new NotificationResult("Item alterado com sucesso!", true);
+        }
+        public async Task<NotificationResult> DeleteAsync(int id)
+        {
+            var deletedItem = await _context.Itens.FirstOrDefaultAsync(x => x.Id == id);
+            if (deletedItem == null) return new NotificationResult("Item não encontrado", false);
+            _context.Itens.Remove(deletedItem);
+            await _context.SaveChangesAsync();
+            return new NotificationResult("Item excluído com sucesso!", true);
         }
     }
 }
