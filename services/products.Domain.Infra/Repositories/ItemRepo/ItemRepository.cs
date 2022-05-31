@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using products.Domain.Entities;
 using products.Domain.Infra.Context;
+using products.Domain.Infra.ViewModels.Item;
+using products.Domain.Notifications;
 
 namespace products.Domain.Infra.Repositories.ItemRepo
 {
@@ -13,12 +15,12 @@ namespace products.Domain.Infra.Repositories.ItemRepo
             _context = context;
         }
 
-        public async Task<Item> CreateAsync(Item item)
+        public async Task<NotificationResult> CreateAsync(NewItem item)
         {
             var newItem = new Item(item.Name, item.Price);
             await _context.Itens.AddAsync(newItem);
             await _context.SaveChangesAsync();
-            return newItem;
+            return new NotificationResult("", true, newItem);
         }
 
         public async Task<int> DeleteAsync(int id)

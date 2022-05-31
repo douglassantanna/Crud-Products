@@ -2106,7 +2106,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DouglasCraici\\.nuget\\packages\\": {}
+    "C:\\Users\\santa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -2114,18 +2114,16 @@
       "projectUniqueName": "C:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj",
       "projectName": "products.Domain.Api",
       "projectPath": "C:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj",
-      "packagesPath": "C:\\Users\\DouglasCraici\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\santa\\.nuget\\packages\\",
       "outputPath": "C:\\dev\\products-web-app\\services\\products.Domain.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\DouglasCraici\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\santa\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2174,7 +2172,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

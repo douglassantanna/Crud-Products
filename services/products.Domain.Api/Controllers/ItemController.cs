@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using products.Domain.Entities;
 using products.Domain.Infra.Repositories.ItemRepo;
+using products.Domain.Infra.ViewModels.Item;
 
 namespace products.Domain.Api.Controllers
 {
@@ -15,10 +16,10 @@ namespace products.Domain.Api.Controllers
             _itemRepository = itemRepository;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<List<Item>>> GetAll()
         {
             var itens = await _itemRepository.GetAllAsync();
-            return Ok(itens);
+            return itens;
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -28,10 +29,10 @@ namespace products.Domain.Api.Controllers
             return Ok(item);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Item item)
+        public async Task<IActionResult> Create(NewItem item)
         {
             var newItem = await _itemRepository.CreateAsync(item);
-            return NoContent();
+            return Created("", item);
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Item item)
@@ -40,7 +41,7 @@ namespace products.Domain.Api.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var item = await _itemRepository.DeleteAsync(id);
