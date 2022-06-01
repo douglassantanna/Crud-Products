@@ -13,3 +13,5 @@ C:\dev\products-web-app\services\products.Domain.Infra\obj\Debug\net6.0\ref\prod
 C:\dev\products-web-app\services\products.Domain.Infra\bin\Debug\net6.0\products.Domain.dll
 C:\dev\products-web-app\services\products.Domain.Infra\bin\Debug\net6.0\products.Domain.pdb
 C:\dev\products-web-app\services\products.Domain.Infra\obj\Debug\net6.0\products.Domain.Infra.csproj.CopyComplete
+C:\dev\products-web-app\services\products.Domain.Infra\bin\Debug\net6.0\products.Domain.Infra.runtimeconfig.json
+C:\dev\products-web-app\services\products.Domain.Infra\obj\Debug\net6.0\products.Domain.Infra.genruntimeconfig.cache

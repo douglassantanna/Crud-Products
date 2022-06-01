@@ -64,4 +64,5 @@ C:\dev\products-web-app\services\products.Domain.Api\bin\Debug\net6.0\products.D
 C:\dev\products-web-app\services\products.Domain.Api\bin\Debug\net6.0\products.Domain.Infra.dll
 C:\dev\products-web-app\services\products.Domain.Api\bin\Debug\net6.0\products.Domain.pdb
 C:\dev\products-web-app\services\products.Domain.Api\bin\Debug\net6.0\products.Domain.Infra.pdb
-C:\dev\products-web-app\services\products.Domain.Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\dev\products-web-app\services\products.Domain.Api\bin\Debug\net6.0\Humanizer.dll
+C:\dev\products-web-app\services\products.Domain.Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll

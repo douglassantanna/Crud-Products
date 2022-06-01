@@ -7,9 +7,9 @@ namespace products.Domain.Infra.Context
 {
     public static class DataExtensions
     {
-        public static IServiceCollection AddEntityFramework(this IServiceCollection services)
+        public static IServiceCollection AddEntityFramework(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("product-db"));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("degestore")));
             return services;
         }
         public static IServiceCollection AddRepositories(this IServiceCollection services)
