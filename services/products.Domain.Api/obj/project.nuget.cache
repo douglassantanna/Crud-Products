@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oEH0BsP/cSPRZpvWL2G1cdBg8rqhw+0jGCBabtVs9h42vWqRrsUK0bWuHPLjQlg5m/PH4Wa9+AmJkyWE0GSZgg==",
+  "dgSpecHash": "5IAEWEp8t4xLL5dukGqwu8LzWoUqjidAAyzSxAc8MVqlIXGYHSr34cSdeliPOduefFm4pSR7L5DBgzWs5eLPKA==",
   "success": true,
   "projectFilePath": "C:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj",
   "expectedPackageFiles": [
