@@ -1,4 +1,6 @@
-namespace products.Domain.Entities;
+using products.Domain.Shared;
+
+namespace products.Domain.Itens.Entities;
 
 public class Item : Entity
 {

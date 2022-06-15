@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using products.Domain.Entities;
+using products.Domain.Itens.Entities;
 
 namespace products.Domain.Infra.Context;
 

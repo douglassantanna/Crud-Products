@@ -8,6 +8,8 @@
     ".NETCoreApp,Version=v6.0": {
       "products.Domain.Api/1.0.0": {
         "dependencies": {
+          "MediatR": "10.0.1",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1",
           "Microsoft.EntityFrameworkCore.Design": "6.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.5",
           "Swashbuckle.AspNetCore": "6.2.3",
@@ -509,10 +511,6 @@
         }
       },
       "products.Domain/1.0.0": {
-        "dependencies": {
-          "MediatR": "10.0.1",
-          "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1"
-        },
         "runtime": {
           "products.Domain.dll": {}
         }

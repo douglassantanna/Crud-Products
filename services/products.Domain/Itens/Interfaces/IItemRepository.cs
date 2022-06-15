@@ -1,8 +1,8 @@
-using products.Domain.Entities;
-using products.Domain.Infra.ViewModels.Item;
-using products.Domain.Notifications;
+using products.Domain.Itens.DTOs;
+using products.Domain.Itens.Entities;
+using products.Domain.Shared;
 
-namespace products.Domain.Infra.Repositories.ItemRepo;
+namespace products.Domain.Itens.Interfaces;
 
 public interface IItemRepository
 {

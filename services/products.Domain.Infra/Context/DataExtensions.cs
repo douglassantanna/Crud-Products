@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using products.Domain.Infra.Repositories.ItemRepo;
+using products.Domain.Itens.Interfaces;
 
 namespace products.Domain.Infra.Context
 {

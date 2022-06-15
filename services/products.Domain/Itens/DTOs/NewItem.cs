@@ -1,4 +1,4 @@
-namespace products.Domain.Infra.ViewModels.Item
+namespace products.Domain.Itens.DTOs
 {
     public class NewItem
     {

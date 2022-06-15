@@ -1,4 +1,4 @@
-﻿namespace products.Domain.Entities;
+﻿namespace products.Domain.Shared;
 
 public class Pagination<T>
 {

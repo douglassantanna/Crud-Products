@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using products.Domain.Entities;
-using products.Domain.Infra.Repositories.ItemRepo;
-using products.Domain.Infra.ViewModels.Item;
+using products.Domain.Itens.DTOs;
+using products.Domain.Itens.Entities;
+using products.Domain.Itens.Interfaces;
 
 namespace products.Domain.Api.Controllers
 {
@@ -47,6 +47,5 @@ namespace products.Domain.Api.Controllers
             var item = await _itemRepository.DeleteAsync(id);
             return NoContent();
         }
-
     }
 }

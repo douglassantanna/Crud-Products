@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using products.Domain.Entities;
 using products.Domain.Infra.Context;
-using products.Domain.Infra.ViewModels.Item;
-using products.Domain.Notifications;
+using products.Domain.Itens.DTOs;
+using products.Domain.Itens.Entities;
+using products.Domain.Itens.Interfaces;
+using products.Domain.Shared;
 
 namespace products.Domain.Infra.Repositories.ItemRepo
 {
@@ -15,10 +16,10 @@ namespace products.Domain.Infra.Repositories.ItemRepo
             _context = context;
         }
 
-        public async Task<NotificationResult> CreateAsync(NewItem item)
+        public async Task<NotificationResult> CreateAsync(NewItem? newItem)
         {
-            var newItem = new Item(item.Name, item.Price);
-            await _context.Itens.AddAsync(newItem);
+            var item = new Item(newItem.Name, newItem.Price);
+            await _context.Itens.AddAsync(item);
             await _context.SaveChangesAsync();
             return new NotificationResult("", true, newItem);
         }
@@ -39,6 +40,7 @@ namespace products.Domain.Infra.Repositories.ItemRepo
             if (updateItem == null) return new NotificationResult("Item não encontrado", false);
             updateItem.UpdateName(item.Name);
             updateItem.UpdatePrice(item.Price);
+            updateItem.UpdatedAt();
             _context.Entry(updateItem).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return new NotificationResult("Item alterado com sucesso!", true);
