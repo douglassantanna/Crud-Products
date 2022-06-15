@@ -1,5 +1,6 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using products.Domain.Itens.DTOs;
+using products.Domain.Itens.Commands;
 using products.Domain.Itens.Entities;
 using products.Domain.Itens.Interfaces;
 
@@ -10,16 +11,18 @@ namespace products.Domain.Api.Controllers
     public class ItemController : ControllerBase
     {
         private readonly IItemRepository _itemRepository;
+        private readonly IMediator _mediator;
 
-        public ItemController(IItemRepository itemRepository)
+        public ItemController(IItemRepository itemRepository, IMediator mediator)
         {
             _itemRepository = itemRepository;
+            _mediator = mediator;
         }
         [HttpGet]
         public async Task<ActionResult<List<Item>>> GetAll()
         {
             var itens = await _itemRepository.GetAllAsync();
-            return itens;
+            return Ok(itens);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -29,10 +32,11 @@ namespace products.Domain.Api.Controllers
             return Ok(item);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(NewItem item)
+        public async Task<IActionResult> Create(CreateItemCommand item)
         {
-            var newItem = await _itemRepository.CreateAsync(item);
-            return Created("", item);
+            var result = await _mediator.Send(item);
+            if(!result.Success) return BadRequest(result);
+            return Created("", result);
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Item item)

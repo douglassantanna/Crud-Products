@@ -1,3 +1,4 @@
+using MediatR;
 using products.Domain.Infra.Context;
 using products.Domain.Infra.Repositories.ItemRepo;
 using products.Domain.Itens.Interfaces;
@@ -10,7 +11,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// builder.Services.AddScoped<IItemRepository, ItemRepository>();
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
+builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddRepositories();
 builder.Services.AddEntityFramework(builder.Configuration);
 

@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using products.Domain.Infra.Context;
-using products.Domain.Itens.DTOs;
 using products.Domain.Itens.Entities;
 using products.Domain.Itens.Interfaces;
 using products.Domain.Shared;
@@ -16,12 +15,10 @@ namespace products.Domain.Infra.Repositories.ItemRepo
             _context = context;
         }
 
-        public async Task<NotificationResult> CreateAsync(NewItem? newItem)
+        public async Task CreateAsync(Item item)
         {
-            var item = new Item(newItem.Name, newItem.Price);
             await _context.Itens.AddAsync(item);
             await _context.SaveChangesAsync();
-            return new NotificationResult("", true, newItem);
         }
         public async Task<List<Item>> GetAllAsync()
         {

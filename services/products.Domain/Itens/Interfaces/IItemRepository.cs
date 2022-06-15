@@ -1,4 +1,3 @@
-using products.Domain.Itens.DTOs;
 using products.Domain.Itens.Entities;
 using products.Domain.Shared;
 
@@ -8,7 +7,7 @@ public interface IItemRepository
 {
     Task<List<Item>> GetAllAsync();
     Task<NotificationResult> GetByIdAsync(int id);
-    Task<NotificationResult> CreateAsync(NewItem item);
+    Task CreateAsync(Item item);
     Task<NotificationResult> UpdateAsync(int id, Item item);
     Task<NotificationResult> DeleteAsync(int id);
 }
