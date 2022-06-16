@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9ZFtwVJ2KNqkwGJ1fEsS5EcCodyGSTWdaNMV570kdIEDVMAbqGrZRDP2a/5vih4S9mbDoJSjMntLmo/5hzXXZw==",
+  "dgSpecHash": "o2f5QjvTg0DHHWGO0k66SxbHtPCO1nZLxQr1TQabV8PyDK2QPjH1UoBWFyQCrhU8qbIwMl0AUYGYxwqJt7YmRQ==",
   "success": true,
   "projectFilePath": "C:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj",
   "expectedPackageFiles": [

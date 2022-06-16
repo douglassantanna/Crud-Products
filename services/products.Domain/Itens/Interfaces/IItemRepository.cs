@@ -8,6 +8,7 @@ public interface IItemRepository
     Task<List<Item>> GetAllAsync();
     Task<NotificationResult> GetByIdAsync(int id);
     Task CreateAsync(Item item);
-    Task<NotificationResult> UpdateAsync(int id, Item item);
-    Task<NotificationResult> DeleteAsync(int id);
+    Task UpdateAsync(Item item);
+    Task DeleteAsync(Item item);
+    Item? GetById(int id);
 }
