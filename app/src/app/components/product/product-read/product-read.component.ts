@@ -16,6 +16,7 @@ export class ProductReadComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.read().subscribe(products => {
+      console.log("ola mundo")
       this.products = products
     })
   }
