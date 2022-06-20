@@ -27,16 +27,12 @@ namespace products.Domain.Api.Controllers
         public ActionResult<Pagination<ViewItem>> GetAll(
             [FromQuery] int pageIndex = 0,
             [FromQuery] int pageSize = 10,
-            
             [FromQuery] string sort = "desc"
         )
         {
             var query = _db.Itens
             .AsSingleQuery()
             .Select(ViewItemExtension.ToView());
-
-           
-
             if (sort == "desc")
                 query = query.OrderByDescending(x => x.Id);
             else
