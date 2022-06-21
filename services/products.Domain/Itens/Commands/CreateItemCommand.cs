@@ -6,6 +6,12 @@ namespace products.Domain.Itens.Commands;
 
 public class CreateItemCommand:IRequest<NotificationResult>
 {
+    public CreateItemCommand(string? name, double price)
+    {
+        Name = name;
+        Price = price;
+    }
+
     public string? Name { get; set; }
     public double Price { get; set; }
 }
