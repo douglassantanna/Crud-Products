@@ -9,7 +9,7 @@ namespace products.Domain.UnitTests.ApplicationCore.Entities;
 public class CreateItemTest
 {
     private string _itemName = "Item criado";
-    private double _itemPrice = 100;
+    private decimal _itemPrice = 100;
 
     [Fact]
     public async void Create_item_with_success()

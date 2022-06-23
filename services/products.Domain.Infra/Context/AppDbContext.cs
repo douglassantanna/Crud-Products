@@ -11,5 +11,10 @@ public class AppDbContext : DbContext
     }
     public DbSet<Item> Itens { get; set; }
     public DbSet<Customer> Customers { get; set; }
-    
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Item>().Property(p => p.Price).HasColumnType("decimal(10,2)");
+    }
+
 }

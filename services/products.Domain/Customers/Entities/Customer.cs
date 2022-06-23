@@ -10,6 +10,7 @@ public class Customer : Entity
         Email = email;
         BirthDate = birthDate;
     }
+    protected Customer(){}
 
     public string? FullName { get; private set; }
     public DateTime BirthDate { get; private set; }
