@@ -8,7 +8,7 @@ namespace products.Domain.UnitTests.ApplicationCore.Entities;
 
 public class CreateItemTest
 {
-    private string _itemName = "blue pencil";
+    private string _itemName = "Item criado";
     private double _itemPrice = 100;
 
     [Fact]
@@ -18,7 +18,6 @@ public class CreateItemTest
         var itemRepository = new Mock<IItemRepository>();
         var addItem = new CreateItemCommand(_itemName, _itemPrice);
         itemRepository.Setup(x => x.CreateAsync(It.IsAny<Item>())).Verifiable();
-        // itemRepository.Setup(x => x.CreateAsync(It.IsAny<Item>())).Returns(Task.FromResult(addItem));
         var addItemCommandHandler = new CreateItemCommandHandler(itemRepository.Object);
 
         // Act
