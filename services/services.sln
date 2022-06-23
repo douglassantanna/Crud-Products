@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "products.Domain.Api", "prod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "products.Domain.Infra", "products.Domain.Infra\products.Domain.Infra.csproj", "{540AEA90-5244-4ED3-98D1-377AFF5DE605}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "products.Domain.UnitTests", "products.Domain.UnitTests\products.Domain.UnitTests.csproj", "{D74FFED0-C2EC-4959-BAE7-9A904BFEC099}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "products.Domain.IntegrationTests", "products.Domain.IntegrationTests\products.Domain.IntegrationTests.csproj", "{90BB2A65-A1FA-4912-9D13-9C532B8C8BB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{540AEA90-5244-4ED3-98D1-377AFF5DE605}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{540AEA90-5244-4ED3-98D1-377AFF5DE605}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{540AEA90-5244-4ED3-98D1-377AFF5DE605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D74FFED0-C2EC-4959-BAE7-9A904BFEC099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D74FFED0-C2EC-4959-BAE7-9A904BFEC099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D74FFED0-C2EC-4959-BAE7-9A904BFEC099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D74FFED0-C2EC-4959-BAE7-9A904BFEC099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90BB2A65-A1FA-4912-9D13-9C532B8C8BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90BB2A65-A1FA-4912-9D13-9C532B8C8BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90BB2A65-A1FA-4912-9D13-9C532B8C8BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90BB2A65-A1FA-4912-9D13-9C532B8C8BB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

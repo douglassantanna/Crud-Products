@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "Bg/t/DhbyC90ojj13wzoYRP+GjV6M4WN5Wf1Q8V824ZKESCiX6L4W3Mgs65/0mGRYD/f5wQo6FJqz2WpfdSV2Q==",
+  "dgSpecHash": "n0t3U7P8NJvgQ9N6giTnquJuLvBzdAkPzS4/mV8lQJI+fwPWvh06fiedyapU+743CIllokosZjk70Fh66GQcBw==",
   "success": true,
   "projectFilePath": "C:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\santa\\.nuget\\packages\\fluentvalidation\\11.0.3\\fluentvalidation.11.0.3.nupkg.sha512",
+    "C:\\Users\\santa\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.0.3\\fluentvalidation.aspnetcore.11.0.3.nupkg.sha512",
+    "C:\\Users\\santa\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.0.3\\fluentvalidation.dependencyinjectionextensions.11.0.3.nupkg.sha512",
+    "C:\\Users\\santa\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
+    "C:\\Users\\santa\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\santa\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\10.0.1\\mediatr.extensions.microsoft.dependencyinjection.10.0.1.nupkg.sha512",
+    "C:\\Users\\santa\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
