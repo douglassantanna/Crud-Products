@@ -18,7 +18,13 @@ public class CreateCustometCommandHandler : IRequestHandler<CreateCustomerComman
     public async Task<NotificationResult> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
         var customer = new Customer(request.FullName, request.Email, request.BirthDate);
-        if (string.IsNullOrEmpty(customer.FullName)) return new NotificationResult("Nome não pode ser vázio.", false);
+        if (string.IsNullOrEmpty(customer.FullName)) 
+            return new NotificationResult("Nome não pode ser vázio.", false);
+        
+        var emailExists = _repository.EmailExists(request.Email);
+        if (emailExists) 
+            return new NotificationResult("Um cliente com esse email ja existe.", false);
+
         await _repository.CreateAsync(customer);
         return new NotificationResult("Cliente criado");
     }

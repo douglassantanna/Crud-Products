@@ -42,5 +42,11 @@ namespace products.Domain.Infra.Repositories.CustomerRepo
             await _context.SaveChangesAsync();
         }
         public Customer? GetById(int id) => _context.Customers.FirstOrDefault(x => x.Id == id);
+
+        public bool EmailExists(string email)
+        {
+            _context.Customers.Where(x => x.Email == email);
+            return true;
+        }
     }
 }

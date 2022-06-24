@@ -11,4 +11,5 @@ public interface ICustomerRepository
     Task UpdateAsync(Customer customer);
     Task DeleteAsync(Customer customer);
     Customer? GetById(int id);
+    bool EmailExists(string email);
 }
