@@ -45,8 +45,16 @@ namespace products.Domain.Infra.Repositories.CustomerRepo
 
         public bool EmailExists(string email)
         {
-            _context.Customers.Where(x => x.Email == email);
-            return true;
+            var result = _context.Customers.Any(x => x.Email == email);
+            return result;
         }
+
+        public int UnderAge(DateTime date)
+        {
+            var age = 0;
+            age = DateTime.Now.AddYears(-date.Year).Year;
+            return age;
+        }
+        
     }
 }

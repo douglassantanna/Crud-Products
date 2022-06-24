@@ -12,4 +12,5 @@ public interface ICustomerRepository
     Task DeleteAsync(Customer customer);
     Customer? GetById(int id);
     bool EmailExists(string email);
+    int UnderAge(DateTime date);
 }
