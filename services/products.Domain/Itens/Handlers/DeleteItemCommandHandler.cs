@@ -17,9 +17,9 @@ namespace products.Domain.Itens.Handlers
         public async Task<NotificationResult> Handle(DeleteItemCommand request, CancellationToken cancellationToken)
         {
             var item = _repository.GetById(request.Id);
-            if(item == null) return new NotificationResult("Item inválido", false);
+            if(item == null) return new NotificationResult("Item invalido", false);
             await _repository.DeleteAsync(item);
-            return new NotificationResult("Item excluído");
+            return new NotificationResult("Item excluido");
         }
     }
 }
