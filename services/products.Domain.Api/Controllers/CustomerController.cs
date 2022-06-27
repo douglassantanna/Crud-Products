@@ -43,9 +43,9 @@ namespace products.Domain.Api.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id) => Ok(_db.Customers.FirstOrDefault(x => x.Id == id));
         [HttpPost]
-        public async Task<IActionResult> Create(CreateCustomerCommand Customer)
+        public async Task<IActionResult> Create(CreateCustomerCommand customer)
         {
-            var result = await _mediator.Send(Customer);
+            var result = await _mediator.Send(customer);
             if (!result.Success) return BadRequest(result);
             return Created("", result);
         }

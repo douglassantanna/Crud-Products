@@ -1,13 +1,17 @@
+using System.Reflection;
+using FluentValidation.AspNetCore;
 using MediatR;
 using products.Domain.Infra.Context;
 using products.Domain.Infra.Repositories.ItemRepo;
 using products.Domain.Itens.Interfaces;
+using products.Domain.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+                
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -15,6 +19,7 @@ builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddRepositories();
 builder.Services.AddEntityFramework(builder.Configuration);
+builder.Services.AddValidators();
 
 var app = builder.Build();
 
@@ -25,7 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors( x => 
+app.UseCors(x =>
 {
     x.AllowAnyMethod();
     x.AllowAnyHeader();
