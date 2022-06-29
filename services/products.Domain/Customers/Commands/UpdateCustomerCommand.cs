@@ -15,6 +15,7 @@ public class UpdateCustomerValidator : AbstractValidator<UpdateCustomerCommand>
 {
     public UpdateCustomerValidator()
     {
+        CascadeMode = CascadeMode.Stop;
         RuleFor(x => x.FullName).NotNull().NotEmpty().Length(2, 100).WithMessage("Digite um nome entre 2 a 100 caracteres");
         RuleFor(x => x.Email).EmailAddress().WithMessage("Um e-mail válido deve ser fornecido.");
     }
