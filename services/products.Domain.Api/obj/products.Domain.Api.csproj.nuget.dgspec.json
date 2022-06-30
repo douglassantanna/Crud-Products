@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj": {}
+    "c:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj": {}
   },
   "projects": {
-    "C:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj": {
+    "c:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj",
+        "projectUniqueName": "c:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj",
         "projectName": "products.Domain.Api",
-        "projectPath": "C:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj",
+        "projectPath": "c:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj",
         "packagesPath": "C:\\Users\\santa\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\products-web-app\\services\\products.Domain.Api\\obj\\",
+        "outputPath": "c:\\dev\\products-web-app\\services\\products.Domain.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\santa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj": {
-                "projectPath": "C:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj"
+              "c:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj": {
+                "projectPath": "c:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj"
               },
-              "C:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj": {
-                "projectPath": "C:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj"
+              "c:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj": {
+                "projectPath": "c:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj"
               }
             }
           }
@@ -54,6 +54,10 @@
             "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[10.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.6, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -92,14 +96,14 @@
         }
       }
     },
-    "C:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj": {
+    "c:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj",
+        "projectUniqueName": "c:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj",
         "projectName": "products.Domain.Infra",
-        "projectPath": "C:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj",
+        "projectPath": "c:\\dev\\products-web-app\\services\\products.Domain.Infra\\products.Domain.Infra.csproj",
         "packagesPath": "C:\\Users\\santa\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\products-web-app\\services\\products.Domain.Infra\\obj\\",
+        "outputPath": "c:\\dev\\products-web-app\\services\\products.Domain.Infra\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\santa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -116,8 +120,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj": {
-                "projectPath": "C:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj"
+              "c:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj": {
+                "projectPath": "c:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj"
               }
             }
           }
@@ -172,14 +176,14 @@
         }
       }
     },
-    "C:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj": {
+    "c:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj",
+        "projectUniqueName": "c:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj",
         "projectName": "products.Domain",
-        "projectPath": "C:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj",
+        "projectPath": "c:\\dev\\products-web-app\\services\\products.Domain\\products.Domain.csproj",
         "packagesPath": "C:\\Users\\santa\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\products-web-app\\services\\products.Domain\\obj\\",
+        "outputPath": "c:\\dev\\products-web-app\\services\\products.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\santa\\AppData\\Roaming\\NuGet\\NuGet.Config",
