@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MaoxNzFYBHTLSouID0VVzM0weB09YQBnl8WBLOAURUWU5eD/ljppo5aDZTpU5YJoLBE59fnK4+2Ys07nVy3i+w==",
+  "dgSpecHash": "XrVMlOYaxuGfbwtjUNhNOjyfWCH/brEKCNkKmOLBACfMJZo3ydRDPC22YUwji1TXhJxdFMQ8Y5x54iBszA5AMQ==",
   "success": true,
-  "projectFilePath": "C:\\dev\\products-web-app\\services\\products.Domain.IntegrationTests\\products.Domain.IntegrationTests.csproj",
+  "projectFilePath": "c:\\dev\\products-web-app\\services\\products.Domain.IntegrationTests\\products.Domain.IntegrationTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\santa\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\santa\\.nuget\\packages\\fluentvalidation\\11.0.3\\fluentvalidation.11.0.3.nupkg.sha512",

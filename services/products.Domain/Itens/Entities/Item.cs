@@ -1,3 +1,4 @@
+using products.Domain.Itens.Exceptions;
 using products.Domain.Shared;
 
 namespace products.Domain.Itens.Entities;
@@ -7,8 +8,9 @@ public class Item : Entity
     public Item(string name, decimal price)
     {
         Name = name;
+        if(string.IsNullOrEmpty(name)) throw new ItemException("Nome obrigatório");
         Price = price;
-        CreatedAt = DateTime.UtcNow;
+        // CreatedAt = DateTime.UtcNow;
     }
     protected Item() { }
 
