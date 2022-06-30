@@ -52,7 +52,7 @@ namespace products.Domain.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, UpdateItemCommand item)
         {
-            if (id != item.Id) return BadRequest(new NotificationResult("Item id incorret.", false, new { itemId = id, item }));
+            if (id != item.Id) return BadRequest(new NotificationResult("ID do item inválido.", false, new { itemId = id, item }));
             var result = await _mediator.Send(item);
             if (!result.Success) return BadRequest(result);
             return NoContent();

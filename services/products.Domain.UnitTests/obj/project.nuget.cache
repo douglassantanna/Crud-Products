@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "z6QbG2sUw4P49aNtNKlBNwtN3sAp1Zz0O7mnw1jusya6MCdOFOGyaYPbgNo/yf6K9nAiX5sEjajhQD/RSQG9OA==",
+  "dgSpecHash": "XDwcFjH7mBweGe0Uk3leF+QfVOLFUQ33Cx2/uJTtl3CTZMIAkPfSa1jtq/nJffjgINFOavEZuNKXWN/BGgMLbA==",
   "success": true,
-  "projectFilePath": "C:\\dev\\products-web-app\\services\\products.Domain.UnitTests\\products.Domain.UnitTests.csproj",
+  "projectFilePath": "c:\\dev\\products-web-app\\services\\products.Domain.UnitTests\\products.Domain.UnitTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\santa\\.nuget\\packages\\castle.core\\5.0.0\\castle.core.5.0.0.nupkg.sha512",
     "C:\\Users\\santa\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
