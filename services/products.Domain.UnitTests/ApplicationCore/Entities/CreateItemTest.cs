@@ -8,7 +8,7 @@ public class CreateItemTest
 
 
     [Fact]
-    public async void Create_item_with_success()
+    public void Create_item_with_success()
     {
         var newItem = new Item(name: "pencil", price: 10);
         Assert.Equal("pencil", newItem.Name);
