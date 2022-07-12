@@ -20,4 +20,9 @@ public class CreateItemTest
     {   
         var exception = Assert.Throws<ItemException>(() => new Item("", 10));
     }
+    [Fact]
+    public void WhenCreatingItem_WithNoPrice_ThrowExcepiton()
+    {   
+        var exception = Assert.Throws<ItemException>(() => new Item("Caneta", 0));
+    }
 }
