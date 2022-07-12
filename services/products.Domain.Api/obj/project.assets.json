@@ -2246,11 +2246,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj",
+      "projectUniqueName": "C:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj",
       "projectName": "products.Domain.Api",
-      "projectPath": "c:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj",
+      "projectPath": "C:\\dev\\products-web-app\\services\\products.Domain.Api\\products.Domain.Api.csproj",
       "packagesPath": "C:\\Users\\santa\\.nuget\\packages\\",
-      "outputPath": "c:\\dev\\products-web-app\\services\\products.Domain.Api\\obj\\",
+      "outputPath": "C:\\dev\\products-web-app\\services\\products.Domain.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\santa\\AppData\\Roaming\\NuGet\\NuGet.Config",

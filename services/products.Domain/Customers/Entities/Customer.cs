@@ -7,7 +7,9 @@ public class Customer : Entity
     public Customer(string? fullName, string? email, DateTime birthDate)
     {
         FullName = fullName;
+            if(string.IsNullOrEmpty(fullName)) throw new Exception("Nome não pode ser vazio");
         Email = email;
+            if(string.IsNullOrEmpty(email)) throw new Exception("E-mail não pode ser vazio");
         BirthDate = birthDate;
     }
     protected Customer(){}

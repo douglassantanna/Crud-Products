@@ -17,6 +17,6 @@ public class DeleteItemValidator : AbstractValidator<DeleteItemCommand>
 {
     public DeleteItemValidator()
     {
-        RuleFor(x => x.Id).NotNull().WithMessage("An id must be provided");
+        RuleFor(x => x.Id).NotNull().WithMessage("ID do item deve ser fornecido.");
     }
 }
