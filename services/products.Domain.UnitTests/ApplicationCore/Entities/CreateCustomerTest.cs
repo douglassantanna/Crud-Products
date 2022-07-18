@@ -1,6 +1,4 @@
 using products.Domain.Customers.Entities;
-using products.Domain.Itens.Entities;
-using products.Domain.Itens.Exceptions;
 
 namespace products.Domain.UnitTests.ApplicationCore.Entities;
 

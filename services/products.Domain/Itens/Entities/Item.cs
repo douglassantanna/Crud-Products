@@ -1,4 +1,3 @@
-using products.Domain.Itens.Exceptions;
 using products.Domain.Shared;
 
 namespace products.Domain.Itens.Entities;
@@ -8,9 +7,9 @@ public class Item : Entity
     public Item(string name, double price)
     {
         Name = name;
-        if(string.IsNullOrEmpty(name)) throw new ItemException("Nome obrigatório");
+        if(string.IsNullOrEmpty(name)) throw new CustomException("Nome obrigatório");
         Price = price;
-        if(price <= 0) throw new ItemException("Preço do item deve ser maior que 0");
+        if(price <= 0) throw new CustomException("Preço do item deve ser maior que 0");
         CreatedAt = DateTime.UtcNow;
     }
     protected Item() { }
