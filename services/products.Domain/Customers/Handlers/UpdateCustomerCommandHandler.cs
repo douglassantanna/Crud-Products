@@ -18,11 +18,10 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
     {
         var customer = _repository.GetById(request.Id);
         if (customer == null) return new NotificationResult("Cliente invalido", false);
-        customer.UpdateFullName(request.FullName);
-        customer.UpdateBirthDate(request.BirthDate);
+        customer.UpdateRazao_social(request.Razao_social);
         customer.UpdateEmail(request.Email);
         await _repository.UpdateAsync(customer);
-        return new NotificationResult("Cliente atualidade");
+        return new NotificationResult("Cliente atualizado");
 
     }
 }
