@@ -4,7 +4,25 @@ namespace products.Domain.Customers.Entities;
 
 public class Customer : Entity
 {
-    public Customer(string email, string razao_social, string nome_fantasia, string cnpj_cpf, string contato, string telefone1_ddd, string telefone1_numero, string endereco, string endereco_numero, string bairro, string complemento, string estado, string cidade, string cep, string contribuinte, string observacao, string pessoa_fisica, EnderecoEntrega enderecoEntrega)
+    public Customer(
+        string email,
+        string razao_social,
+        string nome_fantasia,
+        string cnpj_cpf,
+        string contato,
+        string telefone1_ddd,
+        string telefone1_numero,
+        string endereco,
+        string endereco_numero,
+        string bairro,
+        string complemento,
+        string estado,
+        string cidade,
+        string cep,
+        string contribuinte,
+        string observacao,
+        string pessoa_fisica,
+        List<EnderecoEntrega> enderecosEntrega)
     {
         Codigo_cliente_integracao = cnpj_cpf;
         Email = email;
@@ -26,7 +44,7 @@ public class Customer : Entity
         Contribuinte = contribuinte;
         Observacao = observacao;
         Pessoa_fisica = pessoa_fisica;
-        EnderecoEntrega = enderecoEntrega;
+        EnderecosEntrega = enderecosEntrega;
 
     }
     protected Customer() { }
@@ -49,7 +67,7 @@ public class Customer : Entity
     public string Contribuinte { get; private set; }
     public string Observacao { get; private set; }
     public string Pessoa_fisica { get; private set; }
-    public EnderecoEntrega EnderecoEntrega { get; private set; }
+    public List<EnderecoEntrega> EnderecosEntrega { get; private set; }
     public void UpdateRazao_social(string razao_social) => Razao_social = razao_social;
     public void UpdateEmail(string email) => Email = email;
 }

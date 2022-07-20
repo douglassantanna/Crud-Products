@@ -1,6 +1,5 @@
 using FluentValidation;
 using MediatR;
-using products.Domain.Customers.Entities;
 using products.Domain.Shared;
 
 namespace products.Domain.Customers.Commands;
@@ -23,7 +22,7 @@ public record CreateCustomerCommand(
     string Contribuinte,
     string Observacao,
     string Pessoa_fisica,
-    NewShipingAddress EnderecoEntrega
+    List<NewShipingAddress> EnderecosEntrega
 ) : IRequest<NotificationResult>;
 
 public record NewShipingAddress(
@@ -55,6 +54,6 @@ public class CreateCustomerValidator : AbstractValidator<CreateCustomerCommand>
         RuleFor(x => x.Contribuinte).NotNull().NotEmpty().Length(1, 1).WithMessage("Campo Contribuinte obrigatório. Escolha 'S' para sim e 'N' para não");
         RuleFor(x => x.Contribuinte).NotNull().NotEmpty().Length(1, 1).WithMessage("Campo Contribuinte obrigatório. Escolha 'S' para sim e 'N' para não");
         RuleFor(x => x.Pessoa_fisica).NotNull().NotEmpty().Length(1, 1).WithMessage("Campo Pessoa Física obrigatório. Escolha 'S' para sim e 'N' para não");
-        RuleFor(e => e.EnderecoEntrega).NotNull().NotEmpty().WithMessage("Necessário informar um endereço para entrega");
+        RuleFor(e => e.EnderecosEntrega).NotNull().NotEmpty().WithMessage("Necessário informar um endereço para entrega");
     }
 }
