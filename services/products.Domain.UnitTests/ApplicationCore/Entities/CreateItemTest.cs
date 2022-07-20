@@ -1,5 +1,5 @@
 using products.Domain.Itens.Entities;
-using products.Domain.Itens.Exceptions;
+using products.Domain.Shared;
 
 namespace products.Domain.UnitTests.ApplicationCore.Entities;
 
@@ -18,11 +18,11 @@ public class CreateItemTest
     [Fact]
     public void WhenCreatingItem_WithNoName_ThrowExcepiton()
     {   
-        var exception = Assert.Throws<ItemException>(() => new Item("", 10));
+        var exception = Assert.Throws<CustomException>(() => new Item("", 10));
     }
     [Fact]
     public void WhenCreatingItem_WithNoPrice_ThrowExcepiton()
     {   
-        var exception = Assert.Throws<ItemException>(() => new Item("Caneta", 0));
+        var exception = Assert.Throws<CustomException>(() => new Item("Caneta", 0));
     }
 }

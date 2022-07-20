@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using products.Domain.Infra.Context;
 
@@ -11,9 +12,10 @@ using products.Domain.Infra.Context;
 namespace products.Domain.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220719010457_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,6 +72,9 @@ namespace products.Domain.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EnderecoEntregaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Endereco_numero")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -104,6 +109,8 @@ namespace products.Domain.Infra.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EnderecoEntregaId");
+
                     b.ToTable("Customers");
                 });
 
@@ -114,9 +121,6 @@ namespace products.Domain.Infra.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
 
                     b.Property<string>("EntBairro")
                         .IsRequired()
@@ -147,8 +151,6 @@ namespace products.Domain.Infra.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("EnderecoEntrega");
                 });
@@ -202,11 +204,15 @@ namespace products.Domain.Infra.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("products.Domain.Customers.Entities.EnderecoEntrega", b =>
+            modelBuilder.Entity("products.Domain.Customers.Entities.Customer", b =>
                 {
-                    b.HasOne("products.Domain.Customers.Entities.Customer", null)
-                        .WithMany("EnderecosEntrega")
-                        .HasForeignKey("CustomerId");
+                    b.HasOne("products.Domain.Customers.Entities.EnderecoEntrega", "EnderecoEntrega")
+                        .WithMany()
+                        .HasForeignKey("EnderecoEntregaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EnderecoEntrega");
                 });
 
             modelBuilder.Entity("products.Domain.Itens.Entities.Item", b =>
@@ -226,11 +232,6 @@ namespace products.Domain.Infra.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("products.Domain.Customers.Entities.Customer", b =>
-                {
-                    b.Navigation("EnderecosEntrega");
                 });
 
             modelBuilder.Entity("products.Domain.Orders.Entities.Order", b =>
