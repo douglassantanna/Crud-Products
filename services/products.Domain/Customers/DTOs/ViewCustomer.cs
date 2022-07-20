@@ -23,7 +23,7 @@ public class ViewCustomer
     public string? Contribuinte { get; set; }
     public string? Observacao { get; set; }
     public string? Pessoa_fisica { get; set; }
-    public EnderecoEntrega? EnderecoEntrega { get; set; }
+    public List<EnderecoEntrega>? EnderecosEntrega { get; set; }
 }
 
 public static class ViewCustomerExtension
@@ -46,7 +46,8 @@ public static class ViewCustomerExtension
         Cep = x.Cep,
         Contribuinte = x.Contribuinte,
         Observacao = x.Observacao,
-        Pessoa_fisica = x.Pessoa_fisica
+        Pessoa_fisica = x.Pessoa_fisica,
+        EnderecosEntrega = x.EnderecosEntrega
     };
 }
 

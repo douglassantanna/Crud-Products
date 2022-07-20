@@ -22,10 +22,10 @@ public record CreateCustomerCommand(
     string Contribuinte,
     string Observacao,
     string Pessoa_fisica,
-    List<NewShipingAddress> EnderecosEntrega
+    List<NewShippingAddress> EnderecosEntrega
 ) : IRequest<NotificationResult>;
 
-public record NewShipingAddress(
+public record NewShippingAddress(
         string EntEndereco,
         string EntNumero,
         string EntComplemento,

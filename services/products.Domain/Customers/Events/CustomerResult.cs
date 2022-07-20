@@ -20,7 +20,9 @@ public class CustomerResultHandler : INotificationHandler<CustomerResult>
 
     public Task Handle(CustomerResult notification, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("**********Notification of a new customer created received: {0}**********", notification);
+        _logger.LogInformation(@"
+        **********Notification of a new customer created received: {0}**********
+        ", notification);
         return Task.CompletedTask;
         // await _productNotification.Send(notification.Result);
     }

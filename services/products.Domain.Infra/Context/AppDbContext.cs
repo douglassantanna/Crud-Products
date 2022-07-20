@@ -13,12 +13,18 @@ public class AppDbContext : DbContext
     public DbSet<Item>? Itens { get; set; }
     public DbSet<Customer>? Customers { get; set; }
     public DbSet<Order>? Orders { get; set; }
+    public DbSet<EnderecoEntrega>? EnderecosEntrega { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Item>()
         .HasOne<Order>()
         .WithMany(o => o.Itens)
+        .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<EnderecoEntrega>()
+        .HasOne<Customer>()
+        .WithMany(x => x.EnderecosEntrega)
         .OnDelete(DeleteBehavior.Cascade);
     }
     //api como projeto de inicializacao e rodar migration no infra

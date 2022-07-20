@@ -83,7 +83,7 @@ public class EnderecoEntrega : Entity
         EntEstado = entEstado;
         EntCidade = entCidade;
     }
-
+    protected EnderecoEntrega() { }
     public string EntEndereco { get; private set; }
     public string EntNumero { get; private set; }
     public string EntComplemento { get; private set; }

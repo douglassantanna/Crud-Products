@@ -1,9 +1,7 @@
-using System.Security.Cryptography.X509Certificates;
-using System.Text.Json;
 using Flurl.Http;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using products.Domain.Customers.Entities;
+using products.Domain.Customers.Commands;
 
 namespace products.Domain.Omie.Events.Customers;
 public class AddCustomer : INotificationHandler<NewCustomer>
@@ -25,7 +23,7 @@ public class AddCustomer : INotificationHandler<NewCustomer>
         try
         {
             var addresses = request.EnderecosEntrega.Select(x =>
-                new EnderecoEntrega(
+                new NewShippingAddress(
                     x.EntEndereco,
                     x.EntNumero,
                     x.EntComplemento,
@@ -33,7 +31,7 @@ public class AddCustomer : INotificationHandler<NewCustomer>
                     x.EntCEP,
                     x.EntEstado,
                     x.EntCidade)).ToList();
-                    
+
             if (request is not null)
             {
                 var body = new CustomerRequest(
@@ -71,20 +69,43 @@ public class AddCustomer : INotificationHandler<NewCustomer>
                 .WithHeader("Content-type", "application/json")
                 .WithHeader("accept", "application/json")
                 .SendJsonAsync(HttpMethod.Post, body);
-                // var jsonResponse = await result.GetJsonAsync<CustomerResponse>();
-                // _logger.LogInformation(result.ToString());
-                // _logger.LogInformation("Customer has been added to Omie.");
+
+                var jsonResponse = await result.GetJsonAsync<CustomerResponse>();
+                _logger.LogInformation(@"
+                **********Customer has been added to Omie.**********");
             }
         }
-        catch (Exception e)
+        catch (FlurlHttpException e)
         {
-            _logger.LogError("Error trying to send request to Omie: {0}", e.Message);
+            // var error = await e.GetResponseJsonAsync<ErrorResponse>();
+            // var errorToString = error.ToString();
+            _logger.LogError(@"
+            **********An error has returned from Omie: {0}**********
+            ", e.Call.HttpResponseMessage);
         }
     }
 }
-public class NewCustomer: INotification
+public class NewCustomer : INotification
 {
-    public NewCustomer(string email, string razao_social, string nome_fantasia, string cnpj_cpf, string contato, string telefone1_ddd, string telefone1_numero, string endereco, string endereco_numero, string bairro, string complemento, string estado, string cidade, string cep, string contribuinte, string observacao, string pessoa_fisica, List<EnderecoEntrega> enderecosEntrega)
+    public NewCustomer(
+        string email,
+        string razao_social,
+        string nome_fantasia,
+        string cnpj_cpf,
+        string contato,
+        string telefone1_ddd,
+        string telefone1_numero,
+        string endereco,
+        string endereco_numero,
+        string bairro,
+        string complemento,
+        string estado,
+        string cidade,
+        string cep,
+        string contribuinte,
+        string observacao,
+        string pessoa_fisica,
+        List<NewShippingAddress> enderecosEntrega)
     {
         Email = email;
         Razao_social = razao_social;
@@ -123,29 +144,8 @@ public class NewCustomer: INotification
     public string Contribuinte { get; private set; }
     public string Observacao { get; private set; }
     public string Pessoa_fisica { get; private set; }
-    public List<EnderecoEntrega> EnderecosEntrega { get; private set; }
+    public List<NewShippingAddress> EnderecosEntrega { get; private set; }
 }
-
-// public record NewCustomer(
-//     string Email { get; private set; }
-//     string Razao_social,
-//     string Nome_fantasia,
-//     string Cnpj_cpf,
-//     string Contato,
-//     string Telefone1_ddd,
-//     string Telefone1_numero,
-//     string Endereco,
-//     string Endereco_numero,
-//     string Bairro,
-//     string Complemento,
-//     string Estado,
-//     string Cidade,
-//     string Cep,
-//     string Contribuinte,
-//     string Observacao,
-//     string Pessoa_fisica,
-//     List<EnderecoEntrega> EnderecosEntrega
-// ) : INotification;
 
 public record CustomerResponse(
     int Codigo_cliente_omie,
@@ -170,9 +170,4 @@ public class CustomerRequest
 
 }
 
-// public record CustomerRequest(
-//     string Call,
-//     string App_key,
-//     string App_secrets,
-//     List<NewCustomer> Param
-// );
+public record ErrorResponse(List<string> Headers);

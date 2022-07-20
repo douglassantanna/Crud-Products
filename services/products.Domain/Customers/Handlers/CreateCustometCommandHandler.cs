@@ -13,7 +13,6 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
 {
     private readonly IMediator _mediator;
     private readonly ILogger<CreateCustomerCommandHandler> _logger;
-
     private readonly ICustomerRepository _repository;
 
     public CreateCustomerCommandHandler(ICustomerRepository repository, IMediator mediator, ILogger<CreateCustomerCommandHandler> logger)
@@ -25,7 +24,9 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
 
     public async Task<NotificationResult> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("**********Process to create a customer have been initialized**********");
+        _logger.LogInformation(@"
+        **********Process to create a customer have been initialized**********
+        ");
 
         try
         {
@@ -50,7 +51,9 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
                     x.EntEstado,
                     x.EntCidade)).ToList();
 
-            _logger.LogInformation("**********Creating customer**********");
+            _logger.LogInformation(@"
+            **********Creating customer**********
+            ");
             var customer = new Customer(
                 request.Email,
                 request.Razao_social,
@@ -73,7 +76,9 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
                 );
 
             await _repository.CreateAsync(customer);
-            await _mediator.Publish(new CustomerResult() { Result = new("**********Customer has been created**********") });
+            await _mediator.Publish(new CustomerResult() { Result = new(@"
+            **********Customer has been created**********
+            ") });
             await _mediator.Publish(new NewCustomer(
                 request.Email,
                 request.Razao_social,
@@ -92,9 +97,11 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
                 request.Contribuinte,
                 request.Observacao,
                 request.Pessoa_fisica,
-                addresses
+                request.EnderecosEntrega
             ));
-            _logger.LogInformation("**********Customer has been added to Omie**********");
+            _logger.LogInformation(@"
+            **********Customer has been added to Omie**********
+            ");
         }
         catch (Exception ex)
         {
@@ -105,8 +112,12 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
         }
         finally
         {
-            _logger.LogInformation("**********Customer created**********");
+            _logger.LogInformation(@"
+            **********Customer created**********
+            ");
         }
-        return new NotificationResult("**********Cliente criado**********");
+        return new NotificationResult(@"
+        **********Cliente criado**********
+        ");
     }
 }

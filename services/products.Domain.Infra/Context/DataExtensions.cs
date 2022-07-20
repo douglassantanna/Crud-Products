@@ -14,7 +14,8 @@ namespace products.Domain.Infra.Context
     {
         public static IServiceCollection AddEntityFramework(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("dshop")));
+            // services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("dshop")));
+            services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("dshop"));
             return services;
         }
         public static IServiceCollection AddRepositories(this IServiceCollection services)
