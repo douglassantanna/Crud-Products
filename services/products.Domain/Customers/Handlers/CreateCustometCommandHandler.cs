@@ -41,15 +41,15 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
                 return errors;
             }
 
-            var addresses = request.EnderecosEntrega.Select(x =>
+            var addresses = request.EnderecoEntrega.Select(x =>
                 new EnderecoEntrega(
-                    x.EntEndereco,
-                    x.EntNumero,
-                    x.EntComplemento,
-                    x.EntBairro,
-                    x.EntCEP,
-                    x.EntEstado,
-                    x.EntCidade)).ToList();
+                    x.entEndereco,
+                    x.entNumero,
+                    x.entComplemento,
+                    x.entBairro,
+                    x.entCEP,
+                    x.entEstado,
+                    x.entCidade)).ToList();
 
             _logger.LogInformation(@"
             **********Creating customer**********
@@ -76,10 +76,22 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
                 );
 
             await _repository.CreateAsync(customer);
-            await _mediator.Publish(new CustomerResult() { Result = new(@"
-            **********Customer has been created**********
-            ") });
+            _logger.LogInformation("**********Customer has been created in local database**********");
+
+            _logger.LogInformation(@"
+            **********Starting process to add customer to Omie ERP**********");
+            var addresses2 = request.EnderecoEntrega.Select(x =>
+                new NewShippingAddress(
+                    x.entEndereco,
+                    x.entNumero,
+                    x.entComplemento,
+                    x.entBairro,
+                    x.entCEP,
+                    x.entEstado,
+                    x.entCidade)).ToList();
+
             await _mediator.Publish(new NewCustomer(
+                request.Cnpj_cpf,
                 request.Email,
                 request.Razao_social,
                 request.Nome_fantasia,
@@ -97,27 +109,22 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
                 request.Contribuinte,
                 request.Observacao,
                 request.Pessoa_fisica,
-                request.EnderecosEntrega
+                addresses2
             ));
             _logger.LogInformation(@"
-            **********Customer has been added to Omie**********
-            ");
+            **********Customer has been added to Omie**********");
         }
         catch (Exception ex)
         {
             _logger.LogError(@"
-            Process could not be completed due to an error.
-            Error: {0}
-            ", ex.Message);
+            Process could not be completed due to an error. Error: {0}", ex.Message);
         }
         finally
         {
             _logger.LogInformation(@"
-            **********Customer created**********
-            ");
+            **********Customer created in local database and added to Omie ERP**********");
         }
         return new NotificationResult(@"
-        **********Cliente criado**********
-        ");
+        **********Cliente criado**********");
     }
 }

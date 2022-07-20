@@ -22,17 +22,17 @@ public record CreateCustomerCommand(
     string Contribuinte,
     string Observacao,
     string Pessoa_fisica,
-    List<NewShippingAddress> EnderecosEntrega
+    List<NewShippingAddress> EnderecoEntrega
 ) : IRequest<NotificationResult>;
 
 public record NewShippingAddress(
-        string EntEndereco,
-        string EntNumero,
-        string EntComplemento,
-        string EntBairro,
-        string EntCEP,
-        string EntEstado,
-        string EntCidade);
+        string entEndereco,
+        string entNumero,
+        string entComplemento,
+        string entBairro,
+        string entCEP,
+        string entEstado,
+        string entCidade);
 public class CreateCustomerValidator : AbstractValidator<CreateCustomerCommand>
 {
     public CreateCustomerValidator()
@@ -54,6 +54,6 @@ public class CreateCustomerValidator : AbstractValidator<CreateCustomerCommand>
         RuleFor(x => x.Contribuinte).NotNull().NotEmpty().Length(1, 1).WithMessage("Campo Contribuinte obrigatório. Escolha 'S' para sim e 'N' para não");
         RuleFor(x => x.Contribuinte).NotNull().NotEmpty().Length(1, 1).WithMessage("Campo Contribuinte obrigatório. Escolha 'S' para sim e 'N' para não");
         RuleFor(x => x.Pessoa_fisica).NotNull().NotEmpty().Length(1, 1).WithMessage("Campo Pessoa Física obrigatório. Escolha 'S' para sim e 'N' para não");
-        RuleFor(e => e.EnderecosEntrega).NotNull().NotEmpty().WithMessage("Necessário informar um endereço para entrega");
+        RuleFor(e => e.EnderecoEntrega).NotNull().NotEmpty().WithMessage("Necessário informar um endereço para entrega");
     }
 }

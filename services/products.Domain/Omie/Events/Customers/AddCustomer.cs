@@ -1,13 +1,16 @@
 using Flurl.Http;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using products.Domain.Customers.Commands;
 
 namespace products.Domain.Omie.Events.Customers;
 public class AddCustomer : INotificationHandler<NewCustomer>
 {
+    private const string OMIE_CALL = "IncluirCliente";
+    private const string APP_KEY = "2648370684960";
+    private const string APP_SECRET = "2310dba1bf1176707d8754e808b81f05";
     private readonly ILogger<AddCustomer> _logger;
-
     public AddCustomer(ILogger<AddCustomer> logger)
     {
         _logger = logger;
@@ -17,77 +20,74 @@ public class AddCustomer : INotificationHandler<NewCustomer>
     {
         _logger.LogInformation(@"
         ***********************Omie.Events.AddCustomer***********************
-        **********Process to add a new customer at Omie initialized**********
-        ");
+        **********Process to add a new customer at Omie initialized**********");
 
         try
         {
-            var addresses = request.EnderecosEntrega.Select(x =>
+            var addresses = request.enderecoEntrega.Select(x =>
                 new NewShippingAddress(
-                    x.EntEndereco,
-                    x.EntNumero,
-                    x.EntComplemento,
-                    x.EntBairro,
-                    x.EntCEP,
-                    x.EntEstado,
-                    x.EntCidade)).ToList();
+                    x.entEndereco,
+                    x.entNumero,
+                    x.entComplemento,
+                    x.entBairro,
+                    x.entCEP,
+                    x.entEstado,
+                    x.entCidade)).ToList();
 
             if (request is not null)
             {
                 var body = new CustomerRequest(
-                    call: "IncluirCliente",
-                    app_key: "2648370684960",
-                    app_secrets: "2310dba1bf1176707d8754e808b81f05",
-                    new()
-                    {
+                    call: $"{OMIE_CALL}",
+                    app_key: $"{APP_KEY}",
+                    app_secrets: $"{APP_SECRET}",
+                    new(){
                         new NewCustomer
                             (
-                                request.Email,
-                                request.Razao_social,
-                                request.Nome_fantasia,
-                                request.Cnpj_cpf,
-                                request.Contato,
-                                request.Telefone1_ddd,
-                                request.Telefone1_numero,
-                                request.Endereco,
-                                request.Endereco_numero,
-                                request.Bairro,
-                                request.Complemento,
-                                request.Estado,
-                                request.Cidade,
-                                request.Cep,
-                                request.Contribuinte,
-                                request.Observacao,
-                                request.Pessoa_fisica,
+                                request.cnpj_cpf,
+                                request.email,
+                                request.razao_social,
+                                request.nome_fantasia,
+                                request.cnpj_cpf,
+                                request.contato,
+                                request.telefone1_ddd,
+                                request.telefone1_numero,
+                                request.endereco,
+                                request.endereco_numero,
+                                request.bairro,
+                                request.complemento,
+                                request.estado,
+                                request.cidade,
+                                request.cep,
+                                request.contribuinte,
+                                request.observacao,
+                                request.pessoa_fisica,
                                 addresses
-                            )
-                    }
-
+                            )}
                 );
-                _logger.LogInformation(body.ToString());
+
                 var result = await "https://app.omie.com.br/api/v1/geral/clientes/"
                 .WithHeader("Content-type", "application/json")
                 .WithHeader("accept", "application/json")
-                .SendJsonAsync(HttpMethod.Post, body);
+                .PostJsonAsync(body);
 
-                var jsonResponse = await result.GetJsonAsync<CustomerResponse>();
+                var stringResult = await result.GetStringAsync();
                 _logger.LogInformation(@"
                 **********Customer has been added to Omie.**********");
+                _logger.LogInformation(@"
+                **********Omie response: {0}.**********", stringResult);
             }
         }
-        catch (FlurlHttpException e)
+        catch (Exception e)
         {
-            // var error = await e.GetResponseJsonAsync<ErrorResponse>();
-            // var errorToString = error.ToString();
             _logger.LogError(@"
-            **********An error has returned from Omie: {0}**********
-            ", e.Call.HttpResponseMessage);
+            **********An error has returned from Omie: {0}**********", e.Message);
         }
     }
 }
 public class NewCustomer : INotification
 {
     public NewCustomer(
+        string codigo_cliente_integracao,
         string email,
         string razao_social,
         string nome_fantasia,
@@ -105,68 +105,70 @@ public class NewCustomer : INotification
         string contribuinte,
         string observacao,
         string pessoa_fisica,
-        List<NewShippingAddress> enderecosEntrega)
+        List<NewShippingAddress> enderecoEntrega
+        )
     {
-        Email = email;
-        Razao_social = razao_social;
-        Nome_fantasia = nome_fantasia;
-        Cnpj_cpf = cnpj_cpf;
-        Contato = contato;
-        Telefone1_ddd = telefone1_ddd;
-        Telefone1_numero = telefone1_numero;
-        Endereco = endereco;
-        Endereco_numero = endereco_numero;
-        Bairro = bairro;
-        Complemento = complemento;
-        Estado = estado;
-        Cidade = cidade;
-        Cep = cep;
-        Contribuinte = contribuinte;
-        Observacao = observacao;
-        Pessoa_fisica = pessoa_fisica;
-        EnderecosEntrega = enderecosEntrega;
+        this.codigo_cliente_integracao = cnpj_cpf;
+        this.email = email;
+        this.razao_social = razao_social;
+        this.nome_fantasia = nome_fantasia;
+        this.cnpj_cpf = cnpj_cpf;
+        this.contato = contato;
+        this.telefone1_ddd = telefone1_ddd;
+        this.telefone1_numero = telefone1_numero;
+        this.endereco = endereco;
+        this.endereco_numero = endereco_numero;
+        this.bairro = bairro;
+        this.complemento = complemento;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.cep = cep;
+        this.contribuinte = contribuinte;
+        this.observacao = observacao;
+        this.pessoa_fisica = pessoa_fisica;
+        this.enderecoEntrega = enderecoEntrega;
     }
-
-    public string Email { get; private set; }
-    public string Razao_social { get; private set; }
-    public string Nome_fantasia { get; private set; }
-    public string Cnpj_cpf { get; private set; }
-    public string Contato { get; private set; }
-    public string Telefone1_ddd { get; private set; }
-    public string Telefone1_numero { get; private set; }
-    public string Endereco { get; private set; }
-    public string Endereco_numero { get; private set; }
-    public string Bairro { get; private set; }
-    public string Complemento { get; private set; }
-    public string Estado { get; private set; }
-    public string Cidade { get; private set; }
-    public string Cep { get; private set; }
-    public string Contribuinte { get; private set; }
-    public string Observacao { get; private set; }
-    public string Pessoa_fisica { get; private set; }
-    public List<NewShippingAddress> EnderecosEntrega { get; private set; }
+    public string codigo_cliente_integracao { get; private set; }
+    public string email { get; private set; }
+    public string razao_social { get; private set; }
+    public string nome_fantasia { get; private set; }
+    public string cnpj_cpf { get; private set; }
+    public string contato { get; private set; }
+    public string telefone1_ddd { get; private set; }
+    public string telefone1_numero { get; private set; }
+    public string endereco { get; private set; }
+    public string endereco_numero { get; private set; }
+    public string bairro { get; private set; }
+    public string complemento { get; private set; }
+    public string estado { get; private set; }
+    public string cidade { get; private set; }
+    public string cep { get; private set; }
+    public string contribuinte { get; private set; }
+    public string observacao { get; private set; }
+    public string pessoa_fisica { get; private set; }
+    public List<NewShippingAddress> enderecoEntrega { get; private set; }
 }
 
 public record CustomerResponse(
-    int Codigo_cliente_omie,
-    string Codigo_cliente_integracao,
-    string Codigo_status,
-    string Descricao_status
+    int codigo_cliente_omie,
+    string codigo_cliente_integracao,
+    string codigo_status,
+    string descricao_status
 );
 public class CustomerRequest
 {
     public CustomerRequest(string call, string app_key, string app_secrets, List<NewCustomer> param)
     {
-        Call = call;
-        App_key = app_key;
-        App_secrets = app_secrets;
-        Param = param;
+        this.call = call;
+        this.app_key = app_key;
+        this.app_secret = app_secrets;
+        this.param = param;
     }
 
-    public string Call { get; private set; }
-    public string App_key { get; private set; }
-    public string App_secrets { get; private set; }
-    public List<NewCustomer> Param { get; private set; }
+    public string call { get; private set; }
+    public string app_key { get; private set; }
+    public string app_secret { get; private set; }
+    public List<NewCustomer> param { get; private set; }
 
 }
 

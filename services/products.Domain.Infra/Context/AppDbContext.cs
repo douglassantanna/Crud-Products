@@ -24,7 +24,7 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<EnderecoEntrega>()
         .HasOne<Customer>()
-        .WithMany(x => x.EnderecosEntrega)
+        .WithMany(x => x.EnderecoEntrega)
         .OnDelete(DeleteBehavior.Cascade);
     }
     //api como projeto de inicializacao e rodar migration no infra
