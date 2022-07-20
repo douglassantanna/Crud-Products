@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using products.Domain.Entities;
 using products.Domain.Infra.Context;
-using products.Domain.Infra.ViewModels.Item;
-using products.Domain.Notifications;
+using products.Domain.Itens.Entities;
+using products.Domain.Itens.Interfaces;
+using products.Domain.Shared;
 
 namespace products.Domain.Infra.Repositories.ItemRepo
 {
@@ -15,12 +15,10 @@ namespace products.Domain.Infra.Repositories.ItemRepo
             _context = context;
         }
 
-        public async Task<NotificationResult> CreateAsync(NewItem item)
+        public async Task CreateAsync(Item item)
         {
-            var newItem = new Item(item.Name, item.Price);
-            await _context.Itens.AddAsync(newItem);
+            await _context.Itens.AddAsync(item);
             await _context.SaveChangesAsync();
-            return new NotificationResult("", true, newItem);
         }
         public async Task<List<Item>> GetAllAsync()
         {
@@ -33,23 +31,16 @@ namespace products.Domain.Infra.Repositories.ItemRepo
             if (item == null) return new NotificationResult("Item não encontrado", false);
             return new NotificationResult("", true, item);
         }
-        public async Task<NotificationResult> UpdateAsync(int id, Item item)
+        public async Task UpdateAsync(Item item)
         {
-            var updateItem = await _context.Itens.FirstOrDefaultAsync(x => x.Id == id);
-            if (updateItem == null) return new NotificationResult("Item não encontrado", false);
-            updateItem.UpdateName(item.Name);
-            updateItem.UpdatePrice(item.Price);
-            _context.Entry(updateItem).State = EntityState.Modified;
+            _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return new NotificationResult("Item alterado com sucesso!", true);
         }
-        public async Task<NotificationResult> DeleteAsync(int id)
+        public async Task DeleteAsync(Item item)
         {
-            var deletedItem = await _context.Itens.FirstOrDefaultAsync(x => x.Id == id);
-            if (deletedItem == null) return new NotificationResult("Item não encontrado", false);
-            _context.Itens.Remove(deletedItem);
+            _context.Itens.Remove(item);
             await _context.SaveChangesAsync();
-            return new NotificationResult("Item excluído com sucesso!", true);
         }
+        public Item? GetById(int id) => _context.Itens.FirstOrDefault(x => x.Id == id);
     }
 }
