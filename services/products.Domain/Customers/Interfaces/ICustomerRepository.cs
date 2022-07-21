@@ -6,6 +6,7 @@ namespace products.Domain.Customers.Interfaces;
 public interface ICustomerRepository
 {
     Task<List<Customer>> GetAllAsync();
+    Customer GetByCnpj_cpf(string document);
     Task<NotificationResult> GetByIdAsync(int id);
     Task CreateAsync(Customer customer);
     Task UpdateAsync(Customer customer);

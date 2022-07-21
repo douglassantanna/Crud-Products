@@ -6,6 +6,7 @@ namespace products.Domain.Customers.DTOs;
 public class ViewCustomer
 {
     public int Id { get; set; }
+    public double Codigo_cliente_omie { get; set; }
     public string? Email { get; set; }
     public string? Razao_social { get; set; }
     public string? Nome_fantasia { get; set; }
@@ -31,6 +32,8 @@ public static class ViewCustomerExtension
     public static Expression<Func<Customer, ViewCustomer>> ToView() => x => new ViewCustomer
     {
         Id = x.Id,
+        Codigo_cliente_omie = x.Codigo_cliente_omie,
+        Email = x.Email,
         Razao_social = x.Razao_social,
         Nome_fantasia = x.Nome_fantasia,
         Cnpj_cpf = x.Cnpj_cpf,

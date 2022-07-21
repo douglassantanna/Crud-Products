@@ -50,6 +50,7 @@ public class Customer : Entity
     protected Customer() { }
 
     public string Codigo_cliente_integracao { get; private set; }
+    public double Codigo_cliente_omie { get; set; }
     public string Email { get; private set; }
     public string Razao_social { get; private set; }
     public string Nome_fantasia { get; private set; }
@@ -70,6 +71,12 @@ public class Customer : Entity
     public List<EnderecoEntrega> EnderecoEntrega { get; private set; }
     public void UpdateRazao_social(string razao_social) => Razao_social = razao_social;
     public void UpdateEmail(string email) => Email = email;
+    public void UpdateClienteOmieId(double data)
+    {
+        if (data is 0)
+            throw new CustomException("Codigo cliente omie deve ser maior que zero");
+        Codigo_cliente_omie = data;
+    }
 }
 public class EnderecoEntrega : Entity
 {

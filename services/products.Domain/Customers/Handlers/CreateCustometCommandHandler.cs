@@ -37,7 +37,6 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
                 var message = "**********Process to create a customer has failed due to validation errors**********";
                 _logger.LogInformation($"{message}, **********Errors: {string.Join(",", validated.Errors.Select(e => e.ErrorMessage))}**********");
                 var errors = new NotificationResult(message, false, validated.Errors);
-                await _mediator.Publish(new CustomerResult() { Result = errors });
                 return errors;
             }
 

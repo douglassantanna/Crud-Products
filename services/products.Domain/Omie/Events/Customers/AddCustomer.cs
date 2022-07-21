@@ -3,17 +3,20 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using products.Domain.Customers.Commands;
+using products.Domain.Customers.Interfaces;
 
 namespace products.Domain.Omie.Events.Customers;
 public class AddCustomer : INotificationHandler<NewCustomer>
 {
+    private readonly ICustomerRepository _customerRepository;
     private const string OMIE_CALL = "IncluirCliente";
     private const string APP_KEY = "2648370684960";
     private const string APP_SECRET = "2310dba1bf1176707d8754e808b81f05";
     private readonly ILogger<AddCustomer> _logger;
-    public AddCustomer(ILogger<AddCustomer> logger)
+    public AddCustomer(ILogger<AddCustomer> logger, ICustomerRepository customerRepository)
     {
         _logger = logger;
+        _customerRepository = customerRepository;
     }
 
     public async Task Handle(NewCustomer request, CancellationToken cancellationToken)
@@ -70,11 +73,14 @@ public class AddCustomer : INotificationHandler<NewCustomer>
                 .WithHeader("accept", "application/json")
                 .PostJsonAsync(body);
 
-                var stringResult = await result.GetStringAsync();
+                var dataResult = await result.GetStringAsync();
+                var jsonResult = JsonConvert.DeserializeObject<OmieResult>(dataResult);
                 _logger.LogInformation(@"
                 **********Customer has been added to Omie.**********");
-                _logger.LogInformation(@"
-                **********Omie response: {0}.**********", stringResult);
+
+                var customer = _customerRepository.GetByCnpj_cpf(request.cnpj_cpf);
+                customer.UpdateClienteOmieId(jsonResult.codigo_cliente_omie);
+                await _customerRepository.UpdateAsync(customer);
             }
         }
         catch (Exception e)
@@ -149,12 +155,13 @@ public class NewCustomer : INotification
     public List<NewShippingAddress> enderecoEntrega { get; private set; }
 }
 
-public record CustomerResponse(
-    int codigo_cliente_omie,
+public record OmieResult(
+    double codigo_cliente_omie,
     string codigo_cliente_integracao,
     string codigo_status,
     string descricao_status
 );
+public record CustomerErrorResult(string faultstring, string faultcode);
 public class CustomerRequest
 {
     public CustomerRequest(string call, string app_key, string app_secrets, List<NewCustomer> param)

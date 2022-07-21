@@ -55,6 +55,7 @@ namespace products.Domain.Infra.Repositories.CustomerRepo
             age = DateTime.Now.AddYears(-date.Year).Year;
             return age;
         }
-        
+
+        public Customer GetByCnpj_cpf(string document) => _context.Customers.FirstOrDefault(x => x.Cnpj_cpf == document);
     }
 }
