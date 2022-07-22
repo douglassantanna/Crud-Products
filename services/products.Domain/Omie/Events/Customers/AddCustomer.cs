@@ -88,6 +88,11 @@ public class AddCustomer : INotificationHandler<NewCustomer>
             _logger.LogError(@"
             **********An error has returned from Omie: {0}**********", e.Message);
         }
+        finally
+        {
+            _logger.LogInformation(@"
+            **********Process has ended.**********");
+        }
     }
 }
 public class NewCustomer : INotification
