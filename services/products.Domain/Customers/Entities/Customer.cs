@@ -26,24 +26,60 @@ public class Customer : Entity
     {
         Codigo_cliente_integracao = cnpj_cpf;
         Email = email;
-        if (string.IsNullOrEmpty(email)) throw new CustomException("E-mail não pode ser vazio");
+        if (string.IsNullOrEmpty(email))
+            throw new CustomException("E-mail não pode ser vazio");
         Razao_social = razao_social;
-        if (string.IsNullOrEmpty(razao_social)) throw new CustomException("Nome não pode ser vazio");
+        if (string.IsNullOrEmpty(razao_social))
+            throw new CustomException("Nome não pode ser vazio");
         Nome_fantasia = nome_fantasia;
+        if (string.IsNullOrEmpty(nome_fantasia))
+            throw new CustomException("Nome fantasia não pode ser vazio");
         Cnpj_cpf = cnpj_cpf;
+        if (string.IsNullOrEmpty(cnpj_cpf))
+            throw new CustomException("CNPJ ou CPF não pode ser vazio");
         Contato = contato;
+        if (string.IsNullOrEmpty(contato))
+            throw new CustomException("Nome para contato não pode ser vazio");
         Telefone1_ddd = telefone1_ddd;
+        if (string.IsNullOrEmpty(telefone1_ddd))
+            throw new CustomException("DDD não pode ser vazio");
         Telefone1_numero = telefone1_numero;
+        if (string.IsNullOrEmpty(telefone1_numero))
+            throw new CustomException("Telefone não pode ser vazio");
         Endereco = endereco;
+        if (string.IsNullOrEmpty(endereco))
+            throw new CustomException("Rua não pode ser vazio");
         Endereco_numero = endereco_numero;
+        if (string.IsNullOrEmpty(endereco_numero))
+            throw new CustomException("Número do endereço não pode ser vazio");
         Bairro = bairro;
+        if (string.IsNullOrEmpty(bairro))
+            throw new CustomException("Bairro não pode ser vazio");
         Complemento = complemento;
+        if (string.IsNullOrEmpty(complemento))
+            throw new CustomException("Complemento não pode ser vazio");
         Estado = estado;
+        if (string.IsNullOrEmpty(estado))
+            throw new CustomException("Estado não pode ser vazio");
         Cidade = cidade;
+        if (string.IsNullOrEmpty(cidade))
+            throw new CustomException("Cidade não pode ser vazio");
         Cep = cep;
+        if (string.IsNullOrEmpty(cep))
+            throw new CustomException("CEP não pode ser vazio");
         Contribuinte = contribuinte;
+        if (string.IsNullOrEmpty(contribuinte))
+        {
+            throw new CustomException("Contribuinte não pode ser vazio");
+        }
+        else
+        {
+            contribuinte.ToUpper();
+        }
         Observacao = observacao;
         Pessoa_fisica = pessoa_fisica;
+        if (string.IsNullOrEmpty(pessoa_fisica))
+            throw new CustomException("Pessoa física não pode ser vazio");
         EnderecoEntrega = enderecoEntrega;
 
     }
@@ -69,8 +105,46 @@ public class Customer : Entity
     public string Observacao { get; private set; }
     public string Pessoa_fisica { get; private set; }
     public List<EnderecoEntrega> EnderecoEntrega { get; private set; }
-    public void UpdateRazao_social(string razao_social) => Razao_social = razao_social;
-    public void UpdateEmail(string email) => Email = email;
+    public void UpdateCustomer(
+        string email,
+        string razao_social,
+        string nome_fantasia,
+        string cnpj_cpf,
+        string contato,
+        string telefone1_ddd,
+        string telefone1_numero,
+        string endereco,
+        string endereco_numero,
+        string bairro,
+        string complemento,
+        string estado,
+        string cidade,
+        string cep,
+        string contribuinte,
+        string observacao,
+        string pessoa_fisica,
+        List<EnderecoEntrega> enderecoEntrega
+    )
+    {
+        this.Email = email;
+        this.Razao_social = razao_social;
+        this.Nome_fantasia = nome_fantasia;
+        this.Cnpj_cpf = cnpj_cpf;
+        this.Contato = contato;
+        this.Telefone1_ddd = telefone1_ddd;
+        this.Telefone1_numero = telefone1_numero;
+        this.Endereco = endereco;
+        this.Endereco_numero = endereco_numero;
+        this.Bairro = bairro;
+        this.Complemento = complemento;
+        this.Estado = estado;
+        this.Cidade = cidade;
+        this.Cep = cep;
+        this.Contribuinte = contribuinte;
+        this.Observacao = observacao;
+        this.Pessoa_fisica = pessoa_fisica;
+        this.EnderecoEntrega = enderecoEntrega;
+    }
     public void UpdateClienteOmieId(double data)
     {
         if (data is 0)
@@ -98,5 +172,15 @@ public class EnderecoEntrega : Entity
     public string EntCEP { get; private set; }
     public string EntEstado { get; private set; }
     public string EntCidade { get; private set; }
+    public void UpdateAddress(string entEndereco, string entNumero, string entComplemento, string entBairro, string entCEP, string entEstado, string entCidade)
+    {
+        this.EntEndereco = entEndereco;
+        this.EntNumero = entNumero;
+        this.EntComplemento = entComplemento;
+        this.EntBairro = entBairro;
+        this.EntCEP = entCEP;
+        this.EntEstado = entEstado;
+        this.EntCidade = entCidade;
+    }
 }
 

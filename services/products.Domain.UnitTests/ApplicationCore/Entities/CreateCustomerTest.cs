@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using products.Domain.Customers.Entities;
 using Xunit.Abstractions;
 
@@ -74,7 +75,10 @@ public class CreateCustomerTest
                     entCidade: "teste")
                 }
         );
-        _helper.WriteLine(newCustomer.ToString());
+
+        var customerToString = JsonConvert.SerializeObject(newCustomer);
+        _helper.WriteLine(customerToString);
+
         Assert.NotNull(newCustomer);
     }
 

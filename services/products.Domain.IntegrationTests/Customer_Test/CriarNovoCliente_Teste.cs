@@ -23,15 +23,8 @@ public class CriarNovoCliente_Teste
     NewShippingAddress _validAddress;
     List<NewShippingAddress> _validAddresses;
 
-    public CriarNovoCliente_Teste(ITestOutputHelper helper, ICustomerRepository customerRepository, Mock<ILogger<CreateCustomerCommandHandler>> logger)
+    public CriarNovoCliente_Teste(ITestOutputHelper helper)
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
-        .UseInMemoryDatabase("dshop")
-        .ConfigureWarnings(b => b.Ignore(InMemoryEventId.TransactionIgnoredWarning))
-        .Options;
-        _db = new AppDbContext(options);
-        _mediator.Setup(x => x.Publish(It.IsAny<INotification>(), It.IsAny<CancellationToken>()));
-        _helper = helper;
         _validAddress = new(
                 entEndereco: "rua teste",
                 entNumero: "12",
@@ -44,7 +37,13 @@ public class CriarNovoCliente_Teste
         _validAddresses = new List<NewShippingAddress>();
         _validAddresses.Add(_validAddress);
         _customerRepository = new CustomerRepository(_db);
-        _logger = logger;
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+        .UseInMemoryDatabase("dshop")
+        .ConfigureWarnings(b => b.Ignore(InMemoryEventId.TransactionIgnoredWarning))
+        .Options;
+        _db = new AppDbContext(options);
+        _mediator.Setup(x => x.Publish(It.IsAny<INotification>(), It.IsAny<CancellationToken>()));
+        _helper = helper;
     }
 
     [Fact]
