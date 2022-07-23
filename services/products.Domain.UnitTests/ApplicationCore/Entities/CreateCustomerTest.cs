@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using products.Domain.Customers.Entities;
+using products.Domain.Shared;
 using Xunit.Abstractions;
 
 namespace products.Domain.UnitTests.ApplicationCore.Entities;
@@ -61,7 +62,7 @@ public class CreateCustomerTest
             estado: "sp",
             cidade: "teste",
             cep: "13219110",
-            contribuinte: "s",
+            contribuinte: "n",
             observacao: "teste",
             pessoa_fisica: "s",
             new(){
@@ -82,10 +83,41 @@ public class CreateCustomerTest
         Assert.NotNull(newCustomer);
     }
 
-    // [Theory]
-    // [InlineData("Douglas", "")]
-    // public void WhenCreatingCustomer_WithNoFullNameOrNoEmail_ThrowExcepiton(string fullName, string email)
-    // {   
-    //     var exception = Assert.Throws<Exception>(() => new Customer(fullName, email, DateTime.Now.AddYears(-19)));
-    // }
+    [Fact]
+    public void WhenTryingToCreateCustomer_WithAnyEmptyField_MustFail()
+    {
+        Assert.Throws<CustomException>(() =>
+        {
+            new Customer(
+             email: "teste@teste.com",
+             razao_social: "teste",
+             nome_fantasia: "teste",
+             cnpj_cpf: "40560278896",
+             contato: "teste",
+             telefone1_ddd: "11",
+             telefone1_numero: "941012994",
+             endereco: "teste",
+             endereco_numero: "teste",
+             bairro: "teste",
+             complemento: "teste",
+             estado: "sp",
+             cidade: "teste",
+             cep: "",
+             contribuinte: "n",
+             observacao: "teste",
+             pessoa_fisica: "s",
+             new(){
+                new EnderecoEntrega(
+                    entEndereco: "teste",
+                    entNumero: "teste",
+                    entComplemento: "teste",
+                    entBairro: "teste",
+                    entCEP: "13219110",
+                    entEstado: "sp",
+                    entCidade: "teste")
+                 }
+         );
+        });
+    }
+
 }

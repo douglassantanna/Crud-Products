@@ -67,17 +67,11 @@ public class Customer : Entity
         Cep = cep;
         if (string.IsNullOrEmpty(cep))
             throw new CustomException("CEP não pode ser vazio");
-        Contribuinte = contribuinte;
+        Contribuinte = contribuinte.ToUpper();
         if (string.IsNullOrEmpty(contribuinte))
-        {
             throw new CustomException("Contribuinte não pode ser vazio");
-        }
-        else
-        {
-            contribuinte.ToUpper();
-        }
         Observacao = observacao;
-        Pessoa_fisica = pessoa_fisica;
+        Pessoa_fisica = pessoa_fisica.ToUpper();
         if (string.IsNullOrEmpty(pessoa_fisica))
             throw new CustomException("Pessoa física não pode ser vazio");
         EnderecoEntrega = enderecoEntrega;
@@ -151,6 +145,13 @@ public class Customer : Entity
             throw new CustomException("Codigo cliente omie deve ser maior que zero");
         Codigo_cliente_omie = data;
     }
+    public void AddAddress(EnderecoEntrega address) => EnderecoEntrega.Add(address);
+    public void UpdateAddress(EnderecoEntrega addressToUpdate)
+    {
+        var existingAddress = EnderecoEntrega.FirstOrDefault(a => a.Id == addressToUpdate.Id);
+        existingAddress = addressToUpdate;
+    }
+    public void RemoveAddress(EnderecoEntrega address) => EnderecoEntrega.Remove(address);
 }
 public class EnderecoEntrega : Entity
 {

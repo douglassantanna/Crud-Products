@@ -6,6 +6,7 @@ namespace products.Domain.Customers.Commands;
 
 public record UpdateCustomerCommand(
     int Id,
+    string Codigo_cliente_integracao,
     string Email,
     string Razao_social,
     string Nome_fantasia,
@@ -27,6 +28,7 @@ public record UpdateCustomerCommand(
       ) : IRequest<NotificationResult>;
 
 public record AddressToUpdate(
+    int Id,
     string EntEndereco,
     string EntNumero,
     string EntComplemento,

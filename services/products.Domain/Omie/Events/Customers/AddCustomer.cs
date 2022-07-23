@@ -169,7 +169,7 @@ public record OmieResult(
 public record CustomerErrorResult(string faultstring, string faultcode);
 public class CustomerRequest
 {
-    public CustomerRequest(string call, string app_key, string app_secrets, List<NewCustomer> param)
+    public CustomerRequest(string call, string app_key, string app_secrets, List<object> param)
     {
         this.call = call;
         this.app_key = app_key;
@@ -180,7 +180,7 @@ public class CustomerRequest
     public string call { get; private set; }
     public string app_key { get; private set; }
     public string app_secret { get; private set; }
-    public List<NewCustomer> param { get; private set; }
+    public List<object> param { get; private set; }
 
 }
 
