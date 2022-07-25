@@ -41,7 +41,7 @@ namespace products.Domain.Api.Controllers
             return new Pagination<ViewCustomer>(query, pageIndex, pageSize);
         }
         [HttpGet("{id}")]
-        public IActionResult GetById(int id) => Ok(_db.Customers.FirstOrDefault(x => x.Id == id));
+        public IActionResult GetById(int id) => Ok(_CustomerRepository.GetCustomerWithAddress(id));
         [HttpPost]
         public async Task<IActionResult> Create(CreateCustomerCommand customer)
         {

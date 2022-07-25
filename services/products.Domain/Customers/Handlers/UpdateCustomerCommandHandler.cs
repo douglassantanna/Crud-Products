@@ -42,19 +42,6 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
             var customer = _repository.GetById(request.Id);
             if (customer == null) return new NotificationResult("Cliente invalido", false);
 
-            var newAddressToAdd = request.EnderecoEntrega
-                .Where(a => a.Id == 0)
-                .Select(n => new EnderecoEntrega(
-                n.EntEndereco,
-                n.EntNumero,
-                n.EntComplemento,
-                n.EntBairro,
-                n.EntCEP,
-                n.EntEstado,
-                n.EntCidade)
-                ).ToList();
-            newAddressToAdd.ForEach((address) => { customer.AddAddress(address); });
-
             var addressToUpdate = customer.EnderecoEntrega
             .Where(a => request.EnderecoEntrega.Select(b => b.Id)
             .Contains(a.Id))
@@ -81,25 +68,37 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
                 .ToList();
             addressToRemove.ForEach((address) => { customer.RemoveAddress(address); });
 
+            var newAddressToAdd = request.EnderecoEntrega
+                            .Where(a => a.Id == 0)
+                            .Select(n => new EnderecoEntrega(
+                            n.EntEndereco,
+                            n.EntNumero,
+                            n.EntComplemento,
+                            n.EntBairro,
+                            n.EntCEP,
+                            n.EntEstado,
+                            n.EntCidade)
+                            ).ToList();
+            newAddressToAdd.ForEach((address) => { customer.AddAddress(address); });
 
             customer.UpdateCustomer(
-                customer.Email,
-                customer.Razao_social,
-                customer.Nome_fantasia,
-                customer.Cnpj_cpf,
-                customer.Contato,
-                customer.Telefone1_ddd,
-                customer.Telefone1_numero,
-                customer.Endereco,
-                customer.Endereco_numero,
-                customer.Bairro,
-                customer.Complemento,
-                customer.Estado,
-                customer.Cidade,
-                customer.Cep,
-                customer.Contribuinte,
-                customer.Observacao,
-                customer.Pessoa_fisica,
+                request.Email,
+                request.Razao_social,
+                request.Nome_fantasia,
+                request.Cnpj_cpf,
+                request.Contato,
+                request.Telefone1_ddd,
+                request.Telefone1_numero,
+                request.Endereco,
+                request.Endereco_numero,
+                request.Bairro,
+                request.Complemento,
+                request.Estado,
+                request.Cidade,
+                request.Cep,
+                request.Contribuinte,
+                request.Observacao,
+                request.Pessoa_fisica,
                 customer.EnderecoEntrega
                 );
             await _repository.UpdateAsync(customer);
@@ -151,8 +150,6 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
             _logger.LogInformation(@"
             **********Customer updated in local database and added to Omie ERP**********");
         }
-
         return new NotificationResult("Cliente atualizado");
-
     }
 }

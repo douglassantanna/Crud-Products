@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Flurl.Http;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -73,8 +74,6 @@ public class UpdateCustomer : INotificationHandler<CustomerToUpdate>
                 .WithHeader("accept", "application/json")
                 .PostJsonAsync(body);
 
-                var dataResult = await result.GetStringAsync();
-                var jsonResult = JsonConvert.DeserializeObject<OmieResult>(dataResult);
                 _logger.LogInformation(@"
                 **********Customer has been updated to Omie.**********");
             }
@@ -91,15 +90,27 @@ public class UpdateCustomer : INotificationHandler<CustomerToUpdate>
         }
     }
 }
-public record AddressToUpdateOmie(
-        string entEndereco,
-        string entNumero,
-        string entComplemento,
-        string entBairro,
-        string entCEP,
-        string entEstado,
-        string entCidade
-);
+public class AddressToUpdateOmie
+{
+    public AddressToUpdateOmie(string entEndereco, string entNumero, string entComplemento, string entBairro, string entCEP, string entEstado, string entCidade)
+    {
+        this.entEndereco = entEndereco;
+        this.entNumero = entNumero;
+        this.entComplemento = entComplemento;
+        this.entBairro = entBairro;
+        this.entCEP = entCEP;
+        this.entEstado = entEstado.ToUpper();
+        this.entCidade = entCidade;
+    }
+
+    public string entEndereco { get; private set; }
+    public string entNumero { get; private set; }
+    public string entComplemento { get; private set; }
+    public string entBairro { get; private set; }
+    public string entCEP { get; private set; }
+    public string entEstado { get; private set; }
+    public string entCidade { get; private set; }
+}
 public class CustomerToUpdate : INotification
 {
     public CustomerToUpdate(
@@ -136,12 +147,12 @@ public class CustomerToUpdate : INotification
         this.endereco_numero = endereco_numero;
         this.bairro = bairro;
         this.complemento = complemento;
-        this.estado = estado;
+        this.estado = estado.ToUpper();
         this.cidade = cidade;
         this.cep = cep;
-        this.contribuinte = contribuinte;
+        this.contribuinte = contribuinte.ToUpper();
         this.observacao = observacao;
-        this.pessoa_fisica = pessoa_fisica;
+        this.pessoa_fisica = pessoa_fisica.ToUpper();
         this.enderecoEntrega = enderecoEntrega;
     }
     public string codigo_cliente_integracao { get; private set; }

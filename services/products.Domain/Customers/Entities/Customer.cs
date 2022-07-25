@@ -131,19 +131,19 @@ public class Customer : Entity
         this.Endereco_numero = endereco_numero;
         this.Bairro = bairro;
         this.Complemento = complemento;
-        this.Estado = estado;
+        this.Estado = estado.ToUpper();
         this.Cidade = cidade;
         this.Cep = cep;
-        this.Contribuinte = contribuinte;
+        this.Contribuinte = contribuinte.ToUpper();
         this.Observacao = observacao;
-        this.Pessoa_fisica = pessoa_fisica;
+        this.Pessoa_fisica = pessoa_fisica.ToUpper();
         this.EnderecoEntrega = enderecoEntrega;
     }
-    public void UpdateClienteOmieId(double data)
+    public void UpdateClienteOmieId(double omieID)
     {
-        if (data is 0)
+        if (omieID is 0)
             throw new CustomException("Codigo cliente omie deve ser maior que zero");
-        Codigo_cliente_omie = data;
+        Codigo_cliente_omie = omieID;
     }
     public void AddAddress(EnderecoEntrega address) => EnderecoEntrega.Add(address);
     public void UpdateAddress(EnderecoEntrega addressToUpdate)
@@ -157,13 +157,13 @@ public class EnderecoEntrega : Entity
 {
     public EnderecoEntrega(string entEndereco, string entNumero, string entComplemento, string entBairro, string entCEP, string entEstado, string entCidade)
     {
-        EntEndereco = entEndereco;
-        EntNumero = entNumero;
-        EntComplemento = entComplemento;
-        EntBairro = entBairro;
-        EntCEP = entCEP;
-        EntEstado = entEstado;
-        EntCidade = entCidade;
+        this.EntEndereco = entEndereco;
+        this.EntNumero = entNumero;
+        this.EntComplemento = entComplemento;
+        this.EntBairro = entBairro;
+        this.EntCEP = entCEP;
+        this.EntEstado = entEstado.ToUpper();
+        this.EntCidade = entCidade;
     }
     protected EnderecoEntrega() { }
     public string EntEndereco { get; private set; }
@@ -180,7 +180,7 @@ public class EnderecoEntrega : Entity
         this.EntComplemento = entComplemento;
         this.EntBairro = entBairro;
         this.EntCEP = entCEP;
-        this.EntEstado = entEstado;
+        this.EntEstado = entEstado.ToUpper();
         this.EntCidade = entCidade;
     }
 }

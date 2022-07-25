@@ -56,7 +56,6 @@ public class UpdateCustomerValidator : AbstractValidator<UpdateCustomerCommand>
         RuleFor(x => x.Cidade).NotNull().NotEmpty().Length(2, 50).WithMessage("Digite o nome do cidade");
         RuleFor(x => x.Cep).NotNull().NotEmpty().Length(8, 8).WithMessage("Digite um CEP");
         RuleFor(x => x.Contribuinte).NotNull().NotEmpty().Length(1, 1).WithMessage("Campo Contribuinte obrigatório. Escolha 'S' para sim e 'N' para não");
-        RuleFor(x => x.Contribuinte).NotNull().NotEmpty().Length(1, 1).WithMessage("Campo Contribuinte obrigatório. Escolha 'S' para sim e 'N' para não");
         RuleFor(x => x.Pessoa_fisica).NotNull().NotEmpty().Length(1, 1).WithMessage("Campo Pessoa Física obrigatório. Escolha 'S' para sim e 'N' para não");
         RuleFor(e => e.EnderecoEntrega).NotNull().NotEmpty().WithMessage("Necessário informar um endereço para entrega");
     }
