@@ -1,15 +1,14 @@
-using System.Text.Json;
 using Flurl.Http;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using products.Domain.Customers.Commands;
 using products.Domain.Customers.Interfaces;
+using products.Domain.Omie.Shared;
 
 namespace products.Domain.Omie.Events.Customers;
 public class UpdateCustomer : INotificationHandler<CustomerToUpdate>
 {
     private readonly ICustomerRepository _customerRepository;
+    private const string OMIE_URL = "https://app.omie.com.br/api/v1/geral/clientes/";
     private const string OMIE_CALL = "UpsertCliente";
     private const string APP_KEY = "2648370684960";
     private const string APP_SECRET = "2310dba1bf1176707d8754e808b81f05";
@@ -40,7 +39,7 @@ public class UpdateCustomer : INotificationHandler<CustomerToUpdate>
 
             if (request is not null)
             {
-                var body = new CustomerRequest(
+                var body = new OmieRequest(
                     call: $"{OMIE_CALL}",
                     app_key: $"{APP_KEY}",
                     app_secrets: $"{APP_SECRET}",
@@ -69,7 +68,7 @@ public class UpdateCustomer : INotificationHandler<CustomerToUpdate>
                             )}
                 );
 
-                var result = await "https://app.omie.com.br/api/v1/geral/clientes/"
+                var result = await $"{OMIE_URL}"
                 .WithHeader("Content-type", "application/json")
                 .WithHeader("accept", "application/json")
                 .PostJsonAsync(body);

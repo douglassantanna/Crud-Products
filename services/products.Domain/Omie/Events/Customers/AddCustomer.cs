@@ -4,11 +4,13 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using products.Domain.Customers.Commands;
 using products.Domain.Customers.Interfaces;
+using products.Domain.Omie.Shared;
 
 namespace products.Domain.Omie.Events.Customers;
-public class AddCustomer : INotificationHandler<NewCustomer>
+public class AddCustomer : INotificationHandler<CustomerToAdd>
 {
     private readonly ICustomerRepository _customerRepository;
+    private const string OMIE_URL = "https://app.omie.com.br/api/v1/geral/clientes/";
     private const string OMIE_CALL = "IncluirCliente";
     private const string APP_KEY = "2648370684960";
     private const string APP_SECRET = "2310dba1bf1176707d8754e808b81f05";
@@ -19,7 +21,7 @@ public class AddCustomer : INotificationHandler<NewCustomer>
         _customerRepository = customerRepository;
     }
 
-    public async Task Handle(NewCustomer request, CancellationToken cancellationToken)
+    public async Task Handle(CustomerToAdd request, CancellationToken cancellationToken)
     {
         _logger.LogInformation(@"
         ***********************Omie.Events.AddCustomer***********************
@@ -39,12 +41,12 @@ public class AddCustomer : INotificationHandler<NewCustomer>
 
             if (request is not null)
             {
-                var body = new CustomerRequest(
+                var body = new OmieRequest(
                     call: $"{OMIE_CALL}",
                     app_key: $"{APP_KEY}",
                     app_secrets: $"{APP_SECRET}",
                     new(){
-                        new NewCustomer
+                        new CustomerToAdd
                             (
                                 request.cnpj_cpf,
                                 request.email,
@@ -68,7 +70,7 @@ public class AddCustomer : INotificationHandler<NewCustomer>
                             )}
                 );
 
-                var result = await "https://app.omie.com.br/api/v1/geral/clientes/"
+                var result = await $"{OMIE_URL}"
                 .WithHeader("Content-type", "application/json")
                 .WithHeader("accept", "application/json")
                 .PostJsonAsync(body);
@@ -95,9 +97,9 @@ public class AddCustomer : INotificationHandler<NewCustomer>
         }
     }
 }
-public class NewCustomer : INotification
+public class CustomerToAdd : INotification
 {
-    public NewCustomer(
+    public CustomerToAdd(
         string codigo_cliente_integracao,
         string email,
         string razao_social,
@@ -159,29 +161,3 @@ public class NewCustomer : INotification
     public string pessoa_fisica { get; private set; }
     public List<NewShippingAddress> enderecoEntrega { get; private set; }
 }
-
-public record OmieResult(
-    double codigo_cliente_omie,
-    string codigo_cliente_integracao,
-    string codigo_status,
-    string descricao_status
-);
-public record CustomerErrorResult(string faultstring, string faultcode);
-public class CustomerRequest
-{
-    public CustomerRequest(string call, string app_key, string app_secrets, List<object> param)
-    {
-        this.call = call;
-        this.app_key = app_key;
-        this.app_secret = app_secrets;
-        this.param = param;
-    }
-
-    public string call { get; private set; }
-    public string app_key { get; private set; }
-    public string app_secret { get; private set; }
-    public List<object> param { get; private set; }
-
-}
-
-public record ErrorResponse(List<string> Headers);

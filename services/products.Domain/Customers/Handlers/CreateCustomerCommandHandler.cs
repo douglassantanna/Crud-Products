@@ -89,7 +89,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
                     x.entEstado,
                     x.entCidade)).ToList();
 
-            await _mediator.Publish(new NewCustomer(
+            await _mediator.Publish(new CustomerToAdd(
                 request.Cnpj_cpf,
                 request.Email,
                 request.Razao_social,

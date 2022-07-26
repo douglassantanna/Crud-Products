@@ -138,7 +138,7 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
                 request.Pessoa_fisica,
                 addressesToUpdate
             ));
-            _logger.LogInformation("**********Customer has been updated in to Omie**********");
+            _logger.LogInformation("**********Customer has been updated to Omie**********");
         }
         catch (System.Exception ex)
         {
@@ -148,7 +148,7 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
         finally
         {
             _logger.LogInformation(@"
-            **********Customer updated in local database and added to Omie ERP**********");
+            **********Customer updated in local database and to Omie ERP**********");
         }
         return new NotificationResult("Cliente atualizado");
     }
