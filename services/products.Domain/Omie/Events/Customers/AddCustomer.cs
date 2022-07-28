@@ -12,8 +12,8 @@ public class AddCustomer : INotificationHandler<CustomerToAdd>
     private readonly ICustomerRepository _customerRepository;
     private const string OMIE_URL = "https://app.omie.com.br/api/v1/geral/clientes/";
     private const string OMIE_CALL = "IncluirCliente";
-    private const string APP_KEY = "2648370684960";
-    private const string APP_SECRET = "2310dba1bf1176707d8754e808b81f05";
+    private const string APP_KEY = "2672934660396";
+    private const string APP_SECRET = "b9fa7cb28d51ce793fa82ee32243efc8";
     private readonly ILogger<AddCustomer> _logger;
     public AddCustomer(ILogger<AddCustomer> logger, ICustomerRepository customerRepository)
     {

@@ -79,7 +79,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
 
             _logger.LogInformation(@"
             **********Starting process to add customer to Omie ERP**********");
-            var addresses2 = request.EnderecoEntrega.Select(x =>
+            var omieAddresses = request.EnderecoEntrega.Select(x =>
                 new NewShippingAddress(
                     x.entEndereco,
                     x.entNumero,
@@ -108,7 +108,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
                 request.Contribuinte,
                 request.Observacao,
                 request.Pessoa_fisica,
-                addresses2
+                omieAddresses
             ));
             _logger.LogInformation(@"
             **********Customer has been added to Omie**********");

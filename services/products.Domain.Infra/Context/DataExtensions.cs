@@ -2,10 +2,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using products.Domain.Customers.Interfaces;
+using products.Domain.Infra.Omie;
 using products.Domain.Infra.Repositories.CustomerRepo;
 using products.Domain.Infra.Repositories.ItemRepo;
 using products.Domain.Infra.Repositories.OrderRepo;
 using products.Domain.Itens.Interfaces;
+using products.Domain.Omie;
 using products.Domain.Orders.Interfaces;
 
 namespace products.Domain.Infra.Context
@@ -23,6 +25,7 @@ namespace products.Domain.Infra.Context
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IOmieCustomer, OmieCustomerService>();
             return services;
         }
     }
