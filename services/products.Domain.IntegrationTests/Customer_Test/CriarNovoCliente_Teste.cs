@@ -1,14 +1,20 @@
+using System.Text.Json;
+using Flurl.Http;
+using Flurl.Http.Testing;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
 using Moq;
+using product.Domain.Omie;
 using products.Domain.Customers.Commands;
 using products.Domain.Customers.Entities;
 using products.Domain.Customers.Handlers;
 using products.Domain.Customers.Interfaces;
 using products.Domain.Infra.Context;
+using products.Domain.Infra.Omie;
 using products.Domain.Infra.Repositories.CustomerRepo;
+using products.Domain.Omie;
 using Xunit.Abstractions;
 
 namespace products.Domain.IntegrationTests.Customer_Test;
@@ -22,6 +28,10 @@ public class CriarNovoCliente_Teste
     private readonly ITestOutputHelper _helper;
     NewShippingAddress _validAddress;
     List<NewShippingAddress> _validAddresses;
+    IOmieCustomer _omieCustomer;
+    Mock<ILogger<OmieGetCustomerHandler>> _logger2 = new Mock<ILogger<OmieGetCustomerHandler>>();
+    Mock<ILogger<OmieCustomerService>> _logger3 = new Mock<ILogger<OmieCustomerService>>();
+    private readonly HttpTest _httpTest;
 
     public CriarNovoCliente_Teste(ITestOutputHelper helper)
     {
@@ -44,6 +54,8 @@ public class CriarNovoCliente_Teste
         _db = new AppDbContext(options);
         _mediator.Setup(x => x.Publish(It.IsAny<INotification>(), It.IsAny<CancellationToken>()));
         _helper = helper;
+        _omieCustomer = new OmieCustomerService(_logger3.Object);
+        _httpTest = new HttpTest();
     }
 
     [Fact]
@@ -78,5 +90,31 @@ public class CriarNovoCliente_Teste
         Assert.True(result.Success);
 
         _mediator.Verify(x => x.Publish(It.IsAny<INotification>(), It.IsAny<CancellationToken>()), Times.AtLeastOnce);
+    }
+    [Fact]
+    public async void AoObterUmClienteNaOmie_ComDadosValidos_RetornarStatusCode200()
+    {
+        _httpTest.ForCallsTo("https://app.omie.com.br/api/v1/geral/clientes/").AllowRealHttp();
+
+        OmieGetCustomerCommand body = new(
+                        codigo_cliente_omie: 4966714673,
+                        codigo_cliente_integracao: "57.351.558/0001-39"
+        );
+        OmieGeneralRequest omieRequest = new(
+            call: "ConsultarCliente",
+                    app_key: "2672934660396",
+                    app_secrets: "b9fa7cb28d51ce793fa82ee32243efc8",
+                    new List<object>()
+                    {
+                        body
+                    });
+
+        var result = await "https://app.omie.com.br/api/v1/geral/clientes/"
+                .WithHeader("Content-type", "application/json")
+                .WithHeader("accept", "application/json")
+                .PostJsonAsync(omieRequest);
+
+        var statusCodeResult = result.StatusCode;
+        Assert.Equal(200, statusCodeResult);
     }
 }

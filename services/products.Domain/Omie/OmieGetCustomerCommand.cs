@@ -4,12 +4,8 @@ using products.Domain.Omie;
 using products.Domain.Shared;
 
 namespace product.Domain.Omie;
-public class OmieGetCustomerCommand : OmieGetCustomer, IRequest<NotificationResult>
-{
-    public OmieGetCustomerCommand(string codigo_cliente_omie, string codigo_cliente_integracao)
-    {
-    }
-}
+public record OmieGetCustomerCommand(double codigo_cliente_omie, string codigo_cliente_integracao) : IRequest<NotificationResult>;
+
 public class OmieGetCustomerHandler : IRequestHandler<OmieGetCustomerCommand, NotificationResult>
 {
     private const string OMIE_CALL = "ConsultarCliente";
@@ -26,22 +22,17 @@ public class OmieGetCustomerHandler : IRequestHandler<OmieGetCustomerCommand, No
 
     public async Task<NotificationResult> Handle(OmieGetCustomerCommand request, CancellationToken cancellationToken)
     {
-        try
-        {
-            if (request is null) return new NotificationResult("Request is null");
+        if (request is null) return new NotificationResult("Request is null");
 
-            var body = new OmieGeneralRequest(
-               call: $"{OMIE_CALL}",
-               app_key: $"{APP_KEY}",
-               app_secrets: $"{APP_SECRET}",
-               new() { request });
+        //create validation to OmieGetCustomerCommand
+        var body = new OmieGeneralRequest(
+           call: $"{OMIE_CALL}",
+           app_key: $"{APP_KEY}",
+           app_secrets: $"{APP_SECRET}",
+           new() { request });
 
-            var result = await _omieCustomer.GetCustomer(request);
-        }
-        catch (System.Exception ex)
-        {
-            _logger.LogError($"Error: {ex.Message}");
-        }
-        return new NotificationResult("Great job!");
+        var result = await _omieCustomer.GetCustomer(body);
+
+        return new NotificationResult("Great job!", true, result);
     }
 }

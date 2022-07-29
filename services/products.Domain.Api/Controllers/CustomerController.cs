@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using product.Domain.Omie;
 using products.Domain.Customers.Commands;
 using products.Domain.Customers.DTOs;
 using products.Domain.Customers.Interfaces;
@@ -27,10 +28,11 @@ namespace products.Domain.Api.Controllers
             _omieCustomer = omieCustomer;
         }
         [HttpPost("get-customer")]
-        public async Task<IActionResult> Get(OmieGetCustomer request)
+        public async Task<IActionResult> Get(OmieGetCustomerCommand customer)
         {
-            var response = await _omieCustomer.GetCustomer(request);
-            return Ok(response);
+            var result = await _mediator.Send(customer);
+            if (!result.Success) return BadRequest(result);
+            return Ok(result);
         }
 
         [HttpGet]

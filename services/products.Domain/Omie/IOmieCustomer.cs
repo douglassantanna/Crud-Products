@@ -1,7 +1,7 @@
 namespace products.Domain.Omie;
 public interface IOmieCustomer
 {
-    Task<OmieCustomerResult> GetCustomer(OmieGetCustomer request);
+    Task<OmieCustomerResult> GetCustomer(OmieGeneralRequest request);
 }
 public record OmieCustomerResult(
         string codigo_cliente_integracao,

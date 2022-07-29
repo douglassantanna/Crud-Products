@@ -17,18 +17,12 @@ public class OmieCustomerService : IOmieCustomer
         _logger = logger;
     }
 
-    public async Task<OmieCustomerResult> GetCustomer(OmieGetCustomer request)
+    public async Task<OmieCustomerResult> GetCustomer(OmieGeneralRequest request)
     {
-        var body = new OmieGeneralRequest(
-              call: $"{OMIE_CALL}",
-              app_key: $"{APP_KEY}",
-              app_secrets: $"{APP_SECRET}",
-              new() { request });
-
         var httpResult = await $"{OMIE_URL}"
                .WithHeader("Content-type", "application/json")
                .WithHeader("accept", "application/json")
-               .PostJsonAsync(body);
+               .PostJsonAsync(request);
 
         var dataResult = await httpResult.GetStringAsync();
         var response = JsonSerializer.Deserialize<OmieCustomerResult>(dataResult);
