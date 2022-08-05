@@ -7,7 +7,7 @@ using products.Domain.Infra.Repositories.CustomerRepo;
 using products.Domain.Infra.Repositories.ItemRepo;
 using products.Domain.Infra.Repositories.OrderRepo;
 using products.Domain.Itens.Interfaces;
-using products.Domain.Omie;
+using products.Domain.Omie.OmieCustomers;
 using products.Domain.Orders.Interfaces;
 
 namespace products.Domain.Infra.Context

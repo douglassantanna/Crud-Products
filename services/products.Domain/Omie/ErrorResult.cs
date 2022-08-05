@@ -1,4 +1,4 @@
-namespace products.Domain.Omie.Shared;
+namespace products.Domain.Omie;
 
 public class ErrorResult
 {

@@ -1,9 +1,9 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
+using product.Domain.Omie.OmieCustomers.Requests;
 using products.Domain.Customers.Commands;
 using products.Domain.Customers.Entities;
 using products.Domain.Customers.Interfaces;
-using products.Domain.Omie.Events.Customers;
 using products.Domain.Shared;
 
 namespace products.Domain.Customers.Handlers;
@@ -117,27 +117,25 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
                    x.EntCidade
                    )).ToList();
 
-            await _mediator.Publish(new CustomerToUpdate(
-                request.Cnpj_cpf,
-                request.Email,
-                request.Razao_social,
-                request.Nome_fantasia,
-                request.Cnpj_cpf,
-                request.Contato,
-                request.Telefone1_ddd,
-                request.Telefone1_numero,
-                request.Endereco,
-                request.Endereco_numero,
-                request.Bairro,
-                request.Complemento,
-                request.Estado,
-                request.Cidade,
-                request.Cep,
-                request.Contribuinte,
-                request.Observacao,
-                request.Pessoa_fisica,
-                addressesToUpdate
-            ));
+            OmieUpdateCustomerRequest omieCustomer = new(
+                codigo_cliente_integracao: request.Cnpj_cpf,
+                email: request.Email,
+                razao_social: request.Razao_social,
+                cnpj_cpf: request.Cnpj_cpf,
+                contato: request.Contato,
+                telefone1_numero: request.Telefone1_numero,
+                endereco: request.Endereco,
+                endereco_numero: request.Endereco_numero,
+                bairro: request.Bairro,
+                complemento: request.Complemento,
+                estado: request.Estado,
+                cidade: request.Cidade,
+                cep: request.Cep,
+                contribuinte: request.Contribuinte,
+                observacao: request.Observacao,
+                pessoa_fisica: request.Pessoa_fisica,
+                enderecoEntrega: addressesToUpdate
+            );
             _logger.LogInformation("**********Customer has been updated to Omie**********");
         }
         catch (System.Exception ex)

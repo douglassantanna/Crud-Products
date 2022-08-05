@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
+using product.Domain.Omie.OmieCustomers.Requests;
 using products.Domain.Customers.Commands;
 using products.Domain.Customers.Interfaces;
-using products.Domain.Omie.Events.Customers;
 using products.Domain.Shared;
 
 namespace products.Domain.Customers.Handlers;
@@ -44,10 +44,10 @@ public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerComman
             _logger.LogInformation(@"
             **********Customer deleted from local database**********");
 
-            await _mediator.Publish(new CustomerToDelete(
-                customer.Codigo_cliente_omie,
-                customer.Codigo_cliente_integracao
-            ));
+            OmieDeleteCustomerRequest customerRequest = new(
+                codigo_cliente_omie: customer.Codigo_cliente_omie,
+                codigo_cliente_integracao: customer.Codigo_cliente_integracao
+            );
             _logger.LogInformation(@"
             **********Customer deleted from Omie ERP**********");
         }

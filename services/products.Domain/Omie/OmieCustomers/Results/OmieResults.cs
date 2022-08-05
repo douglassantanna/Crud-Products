@@ -1,9 +1,6 @@
-namespace products.Domain.Omie;
-public interface IOmieCustomer
-{
-    Task<OmieCustomerResult> GetCustomer(OmieGeneralRequest request);
-}
-public record OmieCustomerResult(
+namespace product.Domain.Omie.OmieCustomers.Results;
+
+public record OmieGetCustomerResult(
         string codigo_cliente_integracao,
         string email,
         string razao_social,
@@ -23,8 +20,4 @@ public record OmieCustomerResult(
         string observacao,
         string pessoa_fisica
 );
-public class OmieGetCustomer
-{
-    public string? codigo_cliente_omie { get; set; }
-    public string? codigo_cliente_integracao { get; set; }
-}
+public record OmieCreateCustomerResult(double codigo_cliente_omie, string codigo_cliente_integracao, string codigo_status, string descricao_status);
