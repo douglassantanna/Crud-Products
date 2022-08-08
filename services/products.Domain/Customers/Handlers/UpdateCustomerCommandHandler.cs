@@ -101,6 +101,7 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
                 request.Pessoa_fisica,
                 customer.EnderecoEntrega
                 );
+
             await _repository.UpdateAsync(customer);
             _logger.LogInformation("**********Customer has been updated in local database**********");
 
@@ -117,7 +118,7 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
                    x.EntCidade
                    )).ToList();
 
-            OmieUpdateCustomerRequest omieCustomer = new(
+            OmieUpdateCustomerRequest omieUpdateCustomer = new(
                 codigo_cliente_integracao: request.Cnpj_cpf,
                 email: request.Email,
                 razao_social: request.Razao_social,
@@ -136,6 +137,8 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
                 pessoa_fisica: request.Pessoa_fisica,
                 enderecoEntrega: addressesToUpdate
             );
+            await _mediator.Send(omieUpdateCustomer);
+
             _logger.LogInformation("**********Customer has been updated to Omie**********");
         }
         catch (System.Exception ex)

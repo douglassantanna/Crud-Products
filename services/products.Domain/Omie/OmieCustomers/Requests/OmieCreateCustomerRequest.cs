@@ -51,6 +51,6 @@ public class OmieCreateCustomerHandler : IRequestHandler<OmieCreateCustomerReque
 
         var result = await _omieCustomer.CreateCustomer(body);
 
-        return new NotificationResult("Great job!", true, result);
+        return new NotificationResult("Great job! Customer created.", true, result);
     }
 }

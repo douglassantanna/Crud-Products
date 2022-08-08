@@ -34,6 +34,6 @@ public class OmieDeleteCustomerHandle : IRequestHandler<OmieDeleteCustomerReques
 
         var result = await _omieCustomer.DeleteCustomer(body);
 
-        return new NotificationResult("Great job!", true, result);
+        return new NotificationResult("Great job! Customer deleted.", true, result);
     }
 }

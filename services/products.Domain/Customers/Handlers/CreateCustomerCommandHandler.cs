@@ -98,7 +98,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
                 observacao: request.Observacao,
                 pessoa_fisica: request.Pessoa_fisica
             );
-            var omieResult = await _mediator.Send(omieCustomer);
+            await _mediator.Send(omieCustomer);
             _logger.LogInformation(@"
             **********Customer has been added to Omie**********");
         }

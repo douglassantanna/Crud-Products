@@ -57,8 +57,8 @@ public class OmieUpdateCustomerHandler : IRequestHandler<OmieUpdateCustomerReque
            app_secrets: $"{APP_SECRET}",
            new() { request });
 
-        var result = await _omieCustomer.DeleteCustomer(body);
+        var result = await _omieCustomer.UpdateCustomer(body);
 
-        return new NotificationResult("Great job!", true, result);
+        return new NotificationResult("Great job! Customer updated.", true, result);
     }
 }

@@ -48,6 +48,7 @@ public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerComman
                 codigo_cliente_omie: customer.Codigo_cliente_omie,
                 codigo_cliente_integracao: customer.Codigo_cliente_integracao
             );
+            await _mediator.Send(customerRequest);
             _logger.LogInformation(@"
             **********Customer deleted from Omie ERP**********");
         }

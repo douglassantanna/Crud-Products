@@ -2,6 +2,7 @@ using System.Text.Json;
 using Flurl.Http;
 using Microsoft.Extensions.Logging;
 using product.Domain.Omie.OmieCustomers.Results;
+using products.Domain.Customers.Interfaces;
 using products.Domain.Omie;
 using products.Domain.Omie.OmieCustomers;
 
@@ -10,10 +11,12 @@ public class OmieCustomerService : IOmieCustomer
 {
     private const string OMIE_URL = "https://app.omie.com.br/api/v1/geral/clientes/";
     private readonly ILogger<OmieCustomerService> _logger;
+    private readonly ICustomerRepository _customerRepository;
 
-    public OmieCustomerService(ILogger<OmieCustomerService> logger)
+    public OmieCustomerService(ILogger<OmieCustomerService> logger, ICustomerRepository customerRepository)
     {
         _logger = logger;
+        _customerRepository = customerRepository;
     }
 
     public async Task<OmieCreateCustomerResult> CreateCustomer(OmieGeneralRequest request)
@@ -25,10 +28,16 @@ public class OmieCustomerService : IOmieCustomer
 
         var dataResult = await httpResult.GetStringAsync();
         var response = JsonSerializer.Deserialize<OmieCreateCustomerResult>(dataResult);
-        _logger.LogInformation(@"
-                **********Processo para criar cliente da Omie foi concluído.**********");
+
         if (response is null)
             throw new Exception("Erro ao criar cliente");
+
+        var customer = _customerRepository.GetByCnpj_cpf(response.codigo_cliente_integracao);
+        customer.UpdateClienteOmieId(response.codigo_cliente_omie);
+        await _customerRepository.UpdateAsync(customer);
+
+        _logger.LogInformation(@"
+                **********Processo para criar cliente da Omie foi concluído.**********");
         return response;
     }
     public async Task<OmieGetCustomerResult> GetCustomer(OmieGeneralRequest request)
