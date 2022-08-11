@@ -15,7 +15,7 @@ public class CreateOrderValidator : AbstractValidator<CreateOrderCommand>
 {
     public CreateOrderValidator()
     {
-        CascadeMode = CascadeMode.Stop;
+        ClassLevelCascadeMode = CascadeMode.Stop;
         RuleFor(c => c.CustomerID).NotNull().WithMessage("Um pedido deve conter um cliente");
         RuleForEach(c => c.Itens).NotNull().WithMessage("Um pedido deve conter ao menos um item");
     }

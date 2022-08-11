@@ -38,7 +38,7 @@ public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerComman
             }
 
             var customer = _repository.GetById(request.Id);
-            if (customer == null) return new NotificationResult("Cliente invalido", false);
+            if (customer is null) return new NotificationResult("Cliente invalido", false);
 
             await _repository.DeleteAsync(customer);
             _logger.LogInformation(@"

@@ -13,7 +13,7 @@ public class Order : Entity
         Itens = itens;
         if (itens is null) throw new CustomException("Um pedido deve conter ao menos um item");
     }
-    protected Order(){}
+    protected Order() { }
 
     public Customer Customer { get; private set; }
     public List<Item> Itens { get; private set; }

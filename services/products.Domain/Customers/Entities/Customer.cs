@@ -79,25 +79,25 @@ public class Customer : Entity
     }
     protected Customer() { }
 
-    public string Codigo_cliente_integracao { get; private set; }
+    public string? Codigo_cliente_integracao { get; private set; }
     public double Codigo_cliente_omie { get; set; }
-    public string Email { get; private set; }
-    public string Razao_social { get; private set; }
-    public string Nome_fantasia { get; private set; }
-    public string Cnpj_cpf { get; private set; }
-    public string Contato { get; private set; }
-    public string Telefone1_ddd { get; private set; }
-    public string Telefone1_numero { get; private set; }
-    public string Endereco { get; private set; }
-    public string Endereco_numero { get; private set; }
-    public string Bairro { get; private set; }
-    public string Complemento { get; private set; }
-    public string Estado { get; private set; }
-    public string Cidade { get; private set; }
-    public string Cep { get; private set; }
-    public string Contribuinte { get; private set; }
-    public string Observacao { get; private set; }
-    public string Pessoa_fisica { get; private set; }
+    public string? Email { get; private set; }
+    public string? Razao_social { get; private set; }
+    public string? Nome_fantasia { get; private set; }
+    public string? Cnpj_cpf { get; private set; }
+    public string? Contato { get; private set; }
+    public string? Telefone1_ddd { get; private set; }
+    public string? Telefone1_numero { get; private set; }
+    public string? Endereco { get; private set; }
+    public string? Endereco_numero { get; private set; }
+    public string? Bairro { get; private set; }
+    public string? Complemento { get; private set; }
+    public string? Estado { get; private set; }
+    public string? Cidade { get; private set; }
+    public string? Cep { get; private set; }
+    public string? Contribuinte { get; private set; }
+    public string? Observacao { get; private set; }
+    public string? Pessoa_fisica { get; private set; }
     public List<EnderecoEntrega> EnderecoEntrega { get; private set; }
     public void UpdateCustomer(
         string email,
@@ -166,13 +166,13 @@ public class EnderecoEntrega : Entity
         this.EntCidade = entCidade;
     }
     protected EnderecoEntrega() { }
-    public string EntEndereco { get; private set; }
-    public string EntNumero { get; private set; }
-    public string EntComplemento { get; private set; }
-    public string EntBairro { get; private set; }
-    public string EntCEP { get; private set; }
-    public string EntEstado { get; private set; }
-    public string EntCidade { get; private set; }
+    public string? EntEndereco { get; private set; }
+    public string? EntNumero { get; private set; }
+    public string? EntComplemento { get; private set; }
+    public string? EntBairro { get; private set; }
+    public string? EntCEP { get; private set; }
+    public string? EntEstado { get; private set; }
+    public string? EntCidade { get; private set; }
     public void UpdateAddress(string entEndereco, string entNumero, string entComplemento, string entBairro, string entCEP, string entEstado, string entCidade)
     {
         this.EntEndereco = entEndereco;

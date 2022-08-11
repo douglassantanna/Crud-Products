@@ -5,7 +5,7 @@ using products.Domain.Omie.OmieCustomers;
 using products.Domain.Shared;
 
 namespace product.Domain.Omie.OmieCustomers.Requests;
-public record OmieDeleteCustomerRequest(double codigo_cliente_omie, string codigo_cliente_integracao) : IRequest<NotificationResult>;
+public record OmieDeleteCustomerRequest(double codigo_cliente_omie, string? codigo_cliente_integracao) : IRequest<NotificationResult>;
 
 public class OmieDeleteCustomerHandle : IRequestHandler<OmieDeleteCustomerRequest, NotificationResult>
 {

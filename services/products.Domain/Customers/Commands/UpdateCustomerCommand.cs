@@ -41,7 +41,7 @@ public class UpdateCustomerValidator : AbstractValidator<UpdateCustomerCommand>
 {
     public UpdateCustomerValidator()
     {
-        CascadeMode = CascadeMode.Stop;
+        ClassLevelCascadeMode = CascadeMode.Stop;
         RuleFor(x => x.Email).EmailAddress().WithMessage("Um {PropertyName} válido deve ser fornecido.");
         RuleFor(x => x.Razao_social).NotNull().NotEmpty().WithMessage("Razão social é obrigatório.");
         RuleFor(x => x.Nome_fantasia).NotNull().NotEmpty().WithMessage("Nome fantasia é obrigatório.");

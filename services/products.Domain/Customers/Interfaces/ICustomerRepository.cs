@@ -1,5 +1,4 @@
 using products.Domain.Customers.Entities;
-using products.Domain.Shared;
 
 namespace products.Domain.Customers.Interfaces;
 

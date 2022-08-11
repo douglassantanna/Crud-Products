@@ -14,7 +14,7 @@ public class UpdateItemValidator : AbstractValidator<UpdateItemCommand>
 {
     public UpdateItemValidator()
     {
-        CascadeMode = CascadeMode.Stop;
+        ClassLevelCascadeMode = CascadeMode.Stop;
         RuleFor(x => x.Name).NotNull().NotEmpty().Length(2, 100).WithMessage("Um nome para o item deve ser fornecido");
         RuleFor(x => x.Price).NotNull().NotEmpty().GreaterThan(0).WithMessage("Preço deve ser fornecido");
     }
