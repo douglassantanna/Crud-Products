@@ -14,14 +14,12 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
     private readonly IMediator _mediator;
     private readonly ILogger<CreateCustomerCommandHandler> _logger;
     private readonly ICustomerRepository _repository;
-    private readonly IOmieCustomer _omieServices;
 
-    public CreateCustomerCommandHandler(ICustomerRepository repository, IMediator mediator, ILogger<CreateCustomerCommandHandler> logger, IOmieCustomer omieServices)
+    public CreateCustomerCommandHandler(ICustomerRepository repository, IMediator mediator, ILogger<CreateCustomerCommandHandler> logger)
     {
         _repository = repository;
         _mediator = mediator;
         _logger = logger;
-        _omieServices = omieServices;
     }
 
     public async Task<NotificationResult> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)

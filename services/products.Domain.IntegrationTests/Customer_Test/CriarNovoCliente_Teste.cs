@@ -82,7 +82,7 @@ public class CriarNovoCliente_Teste
         var validation = validator.Validate(command);
         Assert.True(validation.IsValid);
 
-        CreateCustomerCommandHandler handler = new(_customerRepository, _mediator.Object, _loggerCreateCustomerHandler.Object, _omieCustomer.Object);
+        CreateCustomerCommandHandler handler = new(_customerRepository, _mediator.Object, _loggerCreateCustomerHandler.Object);
         var result = await handler.Handle(command, default(CancellationToken));
         Assert.True(result.Success);
 
