@@ -37,7 +37,7 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
         }
 
         var customer = _repository.GetById(request.Id);
-        if (customer == null) return new NotificationResult("Invalid customer", false);
+        if (customer == null) return new NotificationResult("Customer cant be null.", false);
 
 
         var addressesToUpdate = request.EnderecoEntrega.Select(x =>

@@ -61,7 +61,7 @@ namespace products.Domain.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, UpdateCustomerCommand customer)
         {
-            if (id != customer.Id) return BadRequest(new NotificationResult("ID do Customer invalido.", false, new { customerId = id, customer }));
+            if (id != customer.Id) return BadRequest(new NotificationResult("Id da rota diferente da requisição.", false, new { customerId = id, customer }));
             var result = await _mediator.Send(customer);
             if (!result.Success) return BadRequest(result);
             return NoContent();

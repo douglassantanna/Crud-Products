@@ -24,56 +24,56 @@ public class Customer : Entity
         string pessoa_fisica,
         List<EnderecoEntrega> enderecoEntrega)
     {
-        Codigo_cliente_integracao = cnpj_cpf;
-        Email = email;
         if (string.IsNullOrEmpty(email))
             throw new CustomException("E-mail não pode ser vazio");
-        Razao_social = razao_social;
         if (string.IsNullOrEmpty(razao_social))
             throw new CustomException("Nome não pode ser vazio");
-        Nome_fantasia = nome_fantasia;
         if (string.IsNullOrEmpty(nome_fantasia))
             throw new CustomException("Nome fantasia não pode ser vazio");
-        Cnpj_cpf = cnpj_cpf;
         if (string.IsNullOrEmpty(cnpj_cpf))
             throw new CustomException("CNPJ ou CPF não pode ser vazio");
-        Contato = contato;
         if (string.IsNullOrEmpty(contato))
             throw new CustomException("Nome para contato não pode ser vazio");
-        Telefone1_ddd = telefone1_ddd;
         if (string.IsNullOrEmpty(telefone1_ddd))
             throw new CustomException("DDD não pode ser vazio");
-        Telefone1_numero = telefone1_numero;
         if (string.IsNullOrEmpty(telefone1_numero))
             throw new CustomException("Telefone não pode ser vazio");
-        Endereco = endereco;
         if (string.IsNullOrEmpty(endereco))
             throw new CustomException("Rua não pode ser vazio");
-        Endereco_numero = endereco_numero;
         if (string.IsNullOrEmpty(endereco_numero))
             throw new CustomException("Número do endereço não pode ser vazio");
-        Bairro = bairro;
         if (string.IsNullOrEmpty(bairro))
             throw new CustomException("Bairro não pode ser vazio");
-        Complemento = complemento;
         if (string.IsNullOrEmpty(complemento))
             throw new CustomException("Complemento não pode ser vazio");
-        Estado = estado;
         if (string.IsNullOrEmpty(estado))
             throw new CustomException("Estado não pode ser vazio");
-        Cidade = cidade;
         if (string.IsNullOrEmpty(cidade))
             throw new CustomException("Cidade não pode ser vazio");
-        Cep = cep;
         if (string.IsNullOrEmpty(cep))
             throw new CustomException("CEP não pode ser vazio");
-        Contribuinte = contribuinte.ToUpper();
         if (string.IsNullOrEmpty(contribuinte))
             throw new CustomException("Contribuinte não pode ser vazio");
-        Observacao = observacao;
-        Pessoa_fisica = pessoa_fisica.ToUpper();
         if (string.IsNullOrEmpty(pessoa_fisica))
             throw new CustomException("Pessoa física não pode ser vazio");
+        Codigo_cliente_integracao = cnpj_cpf;
+        Email = email;
+        Razao_social = razao_social;
+        Nome_fantasia = nome_fantasia;
+        Cnpj_cpf = cnpj_cpf;
+        Contato = contato;
+        Telefone1_ddd = telefone1_ddd;
+        Telefone1_numero = telefone1_numero;
+        Endereco = endereco;
+        Endereco_numero = endereco_numero;
+        Bairro = bairro;
+        Complemento = complemento;
+        Estado = estado;
+        Cidade = cidade;
+        Cep = cep;
+        Contribuinte = contribuinte.ToUpper();
+        Observacao = observacao;
+        Pessoa_fisica = pessoa_fisica.ToUpper();
         EnderecoEntrega = enderecoEntrega;
 
     }

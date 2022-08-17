@@ -46,7 +46,7 @@ public class OmieUpdateCustomerHandler : IRequestHandler<OmieUpdateCustomerReque
 
     public async Task<NotificationResult> Handle(OmieUpdateCustomerRequest request, CancellationToken cancellationToken)
     {
-        if (request is null) return new NotificationResult("Request is null");
+        if (request is null) return new NotificationResult("Request cant be null", false);
 
         //create validation to OmieUpdateCustomerCommand
         var body = new OmieGeneralRequest(
@@ -58,6 +58,6 @@ public class OmieUpdateCustomerHandler : IRequestHandler<OmieUpdateCustomerReque
         var result = await _omieCustomer.UpdateCustomer(body);
         if (!result.Success) return new("An error occured:", false, new { result.Data });
 
-        return new NotificationResult("", true, result);
+        return new NotificationResult("", true, new { result });
     }
 }
