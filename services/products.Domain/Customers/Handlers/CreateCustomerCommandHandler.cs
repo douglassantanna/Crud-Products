@@ -4,7 +4,6 @@ using product.Domain.Omie.OmieCustomers.Requests;
 using products.Domain.Customers.Commands;
 using products.Domain.Customers.Entities;
 using products.Domain.Customers.Interfaces;
-using products.Domain.Omie.OmieCustomers;
 using products.Domain.Shared;
 
 namespace products.Domain.Customers.Handlers;
@@ -73,6 +72,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
             **********Creating customer**********");
         await _repository.CreateAsync(customer);
         _logger.LogInformation("**********Customer has been created in local database**********");
+
         OmieCreateCustomerRequest omieCustomer = new(
             codigo_cliente_integracao: request.Cnpj_cpf,
             email: request.Email,

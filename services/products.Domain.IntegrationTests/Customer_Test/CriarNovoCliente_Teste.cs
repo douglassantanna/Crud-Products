@@ -22,14 +22,11 @@ public class CriarNovoCliente_Teste
     private readonly AppDbContext _db;
     private readonly ICustomerRepository _customerRepository;
     private readonly ITestOutputHelper _helper;
-    NewShippingAddress _validAddress;
-    List<NewShippingAddress> _validAddresses;
-    Mock<IMediator> _mediator = new Mock<IMediator>();
-
-    Mock<IOmieCustomer> _omieCustomer = new Mock<IOmieCustomer>();
-    Mock<ILogger<OmieGetCustomerHandler>> _loggerGetCustomerHandler = new Mock<ILogger<OmieGetCustomerHandler>>();
+    private readonly NewShippingAddress _validAddress;
+    private readonly List<NewShippingAddress> _validAddresses;
+    private readonly Mock<IMediator> _mediator = new Mock<IMediator>();
+    private readonly Mock<IOmieCustomer> _omieCustomer = new Mock<IOmieCustomer>();
     private readonly HttpTest _httpTest;
-
     public CriarNovoCliente_Teste(ITestOutputHelper helper)
     {
         _validAddress = new(
@@ -89,18 +86,35 @@ public class CriarNovoCliente_Teste
         _mediator.Verify(x => x.Publish(It.IsAny<INotification>(), It.IsAny<CancellationToken>()), Times.AtLeastOnce);
     }
 
-    // [Fact]
-    // public async void AoObterUmCliente_ComDadosCorretos_DeveSerPersistido()
-    // {
-    //     OmieGetCustomerRequest command = new(
-    //                     codigo_cliente_omie: 4966714673,
-    //                     codigo_cliente_integracao: "57.351.558/0001-39"
-    //     );
+    [Fact]
+    public async void AoCriarNovoClienteNaOmie_ComDadosValidos_RetornarSucesso()
+    {
+        CreateCustomerCommand command = new(
+            Email: "",
+            Razao_social: "Douglas ltda",
+            Nome_fantasia: "Douglas",
+            Cnpj_cpf: "40560278896",
+            Contato: "Teste",
+            Telefone1_ddd: "11",
+            Telefone1_numero: "941012994",
+            Endereco: "teste",
+            Endereco_numero: "10",
+            Bairro: "teste",
+            Complemento: "teste",
+            Estado: "SP",
+            Cidade: "Jundiaí",
+            Cep: "13219110",
+            Contribuinte: "s",
+            Observacao: "nenhuma",
+            Pessoa_fisica: "s",
+            EnderecoEntrega: _validAddresses
+        );
 
-    //     OmieGetCustomerHandler handler = new(_omieCustomer.Object, _loggerGetCustomerHandler.Object);
-    //     var result = await handler.Handle(command, default(CancellationToken));
-    //     Assert.True(result.Success);
-    // }
+        Mock<ILogger<CreateCustomerCommandHandler>> _loggerGetCustomerHandler = new Mock<ILogger<CreateCustomerCommandHandler>>();
+        CreateCustomerCommandHandler handler = new(_customerRepository, _mediator.Object, _loggerGetCustomerHandler.Object);
+        var result = await handler.Handle(command, default(CancellationToken));
+        Assert.True(result.Success);
+    }
     [Fact]
     public async void AoObterUmClienteNaOmie_ComDadosValidos_RetornarStatusCode200()
     {

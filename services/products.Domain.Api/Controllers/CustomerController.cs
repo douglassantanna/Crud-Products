@@ -6,8 +6,6 @@ using products.Domain.Customers.Commands;
 using products.Domain.Customers.DTOs;
 using products.Domain.Customers.Interfaces;
 using products.Domain.Infra.Context;
-using products.Domain.Omie;
-using products.Domain.Omie.OmieCustomers;
 using products.Domain.Shared;
 
 namespace products.Domain.Api.Controllers
@@ -19,24 +17,15 @@ namespace products.Domain.Api.Controllers
         private readonly ICustomerRepository _CustomerRepository;
         private readonly IMediator _mediator;
         private readonly AppDbContext _db;
-        private readonly IOmieCustomer _omieCustomer;
 
-        public CustomerController(ICustomerRepository customerRepository, IMediator mediator, AppDbContext db, IOmieCustomer omieCustomer)
+        public CustomerController(ICustomerRepository customerRepository, IMediator mediator, AppDbContext db)
         {
             _CustomerRepository = customerRepository;
             _mediator = mediator;
             _db = db;
-            _omieCustomer = omieCustomer;
         }
         [HttpPost("get-customer")]
         public async Task<IActionResult> Get(OmieGetCustomerRequest customer)
-        {
-            var result = await _mediator.Send(customer);
-            if (!result.Success) return BadRequest(result);
-            return Ok(result);
-        }
-        [HttpPost("create-customer")]
-        public async Task<IActionResult> Create(OmieCreateCustomerRequest customer)
         {
             var result = await _mediator.Send(customer);
             if (!result.Success) return BadRequest(result);
