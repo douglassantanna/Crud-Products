@@ -23,46 +23,42 @@ public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerComman
     public async Task<NotificationResult> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
     {
         _logger.LogInformation(@"
-        **********Process to delete a customer have been initialized**********
-        ");
-        try
+        **********Process to delete a customer have been initialized**********");
+
+        var validation = new DeleteCustomerValidator();
+        var validated = validation.Validate(request);
+        if (!validated.IsValid)
         {
-            var validation = new DeleteCustomerValidator();
-            var validated = validation.Validate(request);
-            if (!validated.IsValid)
-            {
-                var message = "**********Process to update a customer has failed due to validation errors**********";
-                _logger.LogInformation($"{message}, **********Errors: {string.Join(",", validated.Errors.Select(e => e.ErrorMessage))}**********");
-                var errors = new NotificationResult(message, false, validated.Errors);
-                return errors;
-            }
-
-            var customer = _repository.GetById(request.Id);
-            if (customer is null) return new NotificationResult("Cliente invalido", false);
-
-            await _repository.DeleteAsync(customer);
-            _logger.LogInformation(@"
-            **********Customer deleted from local database**********");
-
-            OmieDeleteCustomerRequest customerRequest = new(
-                codigo_cliente_omie: customer.Codigo_cliente_omie,
-                codigo_cliente_integracao: customer.Codigo_cliente_integracao
-            );
-            await _mediator.Send(customerRequest);
-            _logger.LogInformation(@"
-            **********Customer deleted from Omie ERP**********");
+            var message = "**********Process to update a customer has failed due to validation errors**********";
+            _logger.LogInformation($"{message}, **********Errors: {string.Join(",", validated.Errors.Select(e => e.ErrorMessage))}**********");
+            var errors = new NotificationResult(message, false, validated.Errors);
+            return errors;
         }
-        catch (Exception ex)
+
+        var customer = _repository.GetById(request.Id);
+        if (customer is null) return new NotificationResult("Customer is null.", false);
+
+        OmieDeleteCustomerRequest customerRequest = new(
+            codigo_cliente_omie: customer.Codigo_cliente_omie,
+            codigo_cliente_integracao: customer.Codigo_cliente_integracao
+        );
+        _logger.LogInformation(@"
+            **********Deleting customer from Omie ERP**********");
+        var omieResponse = await _mediator.Send(customerRequest);
+        if (!omieResponse.Success)
         {
             _logger.LogError(@"
-            Process could not be completed due to an error. Error: {0}", ex.Message);
+            **********Delete customer process at Omie has failed. Error: {0}**********", new { omieResponse.Data });
+            return new("An error occured:", false, new { omieResponse.Data });
         }
-        finally
-        {
-            _logger.LogInformation(@"
-            **********Customer deleted from local database and from Omie ERP**********");
-        }
+        _logger.LogInformation(@"
+            **********Customer deleted from Omie ERP**********");
 
-        return new NotificationResult("Cliente excluido");
+        await _repository.DeleteAsync(customer);
+        _logger.LogInformation(@"
+            **********Customer deleted from local database**********");
+        _logger.LogInformation(@"
+            **********Process completed**********");
+        return new NotificationResult("Customer deleted.", true, new { omieResponse.Data });
     }
 }

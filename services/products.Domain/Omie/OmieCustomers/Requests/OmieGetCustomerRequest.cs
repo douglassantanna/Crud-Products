@@ -1,5 +1,4 @@
 using MediatR;
-using Microsoft.Extensions.Logging;
 using products.Domain.Omie;
 using products.Domain.Omie.OmieCustomers;
 using products.Domain.Shared;
@@ -9,31 +8,30 @@ public record OmieGetCustomerRequest(double codigo_cliente_omie, string codigo_c
 
 public class OmieGetCustomerHandler : IRequestHandler<OmieGetCustomerRequest, NotificationResult>
 {
-    private const string OMIE_CALL = "ConsultarCliente";
-    private const string APP_KEY = "2699300300697";
-    private const string APP_SECRET = "b7ab98a7fc57e3aba0639bcbf393ff39";
     private readonly IOmieCustomer _omieCustomer;
-    private readonly ILogger<OmieGetCustomerHandler> _logger;
+    private readonly OmieConfigurations _configurations;
 
-    public OmieGetCustomerHandler(IOmieCustomer omieCustomer, ILogger<OmieGetCustomerHandler> logger)
+    public OmieGetCustomerHandler(IOmieCustomer omieCustomer, OmieConfigurations configurations)
     {
         _omieCustomer = omieCustomer;
-        _logger = logger;
+        _configurations = configurations;
+        _configurations.OMIE_CALL = "ConsultarCliente";
     }
 
     public async Task<NotificationResult> Handle(OmieGetCustomerRequest request, CancellationToken cancellationToken)
     {
-        if (request is null) return new NotificationResult("Request is null");
+        if (request is null) return new NotificationResult("Request nao pode ser nulo.");
 
         //create validation to OmieGetCustomerCommand
         var body = new OmieGeneralRequest(
-           call: $"{OMIE_CALL}",
-           app_key: $"{APP_KEY}",
-           app_secrets: $"{APP_SECRET}",
+           call: $"{_configurations.OMIE_CALL}",
+           app_key: $"{_configurations.APP_KEY}",
+           app_secrets: $"{_configurations.APP_SECRET}",
            new() { request });
 
         var result = await _omieCustomer.GetCustomer(body);
+        if (!result.Success) return new("An error occured:", false, new { result.Data });
 
-        return new NotificationResult("Great job!", true, result);
+        return new NotificationResult("", true, result);
     }
 }

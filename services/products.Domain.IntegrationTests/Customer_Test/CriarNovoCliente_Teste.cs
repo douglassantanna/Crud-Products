@@ -89,18 +89,18 @@ public class CriarNovoCliente_Teste
         _mediator.Verify(x => x.Publish(It.IsAny<INotification>(), It.IsAny<CancellationToken>()), Times.AtLeastOnce);
     }
 
-    [Fact]
-    public async void AoObterUmCliente_ComDadosCorretos_DeveSerPersistido()
-    {
-        OmieGetCustomerRequest command = new(
-                        codigo_cliente_omie: 4966714673,
-                        codigo_cliente_integracao: "57.351.558/0001-39"
-        );
+    // [Fact]
+    // public async void AoObterUmCliente_ComDadosCorretos_DeveSerPersistido()
+    // {
+    //     OmieGetCustomerRequest command = new(
+    //                     codigo_cliente_omie: 4966714673,
+    //                     codigo_cliente_integracao: "57.351.558/0001-39"
+    //     );
 
-        OmieGetCustomerHandler handler = new(_omieCustomer.Object, _loggerGetCustomerHandler.Object);
-        var result = await handler.Handle(command, default(CancellationToken));
-        Assert.True(result.Success);
-    }
+    //     OmieGetCustomerHandler handler = new(_omieCustomer.Object, _loggerGetCustomerHandler.Object);
+    //     var result = await handler.Handle(command, default(CancellationToken));
+    //     Assert.True(result.Success);
+    // }
     [Fact]
     public async void AoObterUmClienteNaOmie_ComDadosValidos_RetornarStatusCode200()
     {

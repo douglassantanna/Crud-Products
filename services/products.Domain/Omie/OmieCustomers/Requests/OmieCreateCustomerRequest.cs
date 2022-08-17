@@ -26,31 +26,33 @@ public record OmieCreateCustomerRequest(
 
 public class OmieCreateCustomerHandler : IRequestHandler<OmieCreateCustomerRequest, NotificationResult>
 {
-    private const string OMIE_CALL = "IncluirCliente";
-    private const string APP_KEY = "2699300300697";
-    private const string APP_SECRET = "b7ab98a7fc57e3aba0639bcbf393ff39";
     private readonly IOmieCustomer _omieCustomer;
     private readonly ILogger<OmieCreateCustomerHandler> _logger;
+    private readonly OmieConfigurations _configurations;
 
-    public OmieCreateCustomerHandler(IOmieCustomer omieCustomer, ILogger<OmieCreateCustomerHandler> logger)
+    public OmieCreateCustomerHandler(IOmieCustomer omieCustomer, ILogger<OmieCreateCustomerHandler> logger, OmieConfigurations configurations)
     {
+
         _omieCustomer = omieCustomer;
         _logger = logger;
+        _configurations = configurations;
+        _configurations.OMIE_CALL = "IncluirCliente";
     }
 
     public async Task<NotificationResult> Handle(OmieCreateCustomerRequest request, CancellationToken cancellationToken)
     {
-        if (request is null) return new NotificationResult("Request is null");
+        if (request is null) return new NotificationResult("Request nao pode ser nulo");
 
         //create validation to OmieCreateCustomerCommand
         var body = new OmieGeneralRequest(
-           call: $"{OMIE_CALL}",
-           app_key: $"{APP_KEY}",
-           app_secrets: $"{APP_SECRET}",
+           call: $"{_configurations.OMIE_CALL}",
+           app_key: $"{_configurations.APP_KEY}",
+           app_secrets: $"{_configurations.APP_SECRET}",
            new() { request });
 
         var result = await _omieCustomer.CreateCustomer(body);
+        if (!result.Success) return new("An error occured:", false, new { result.Data });
 
-        return new NotificationResult("Great job! Customer created.", true, result);
+        return new("", true, result);
     }
 }
