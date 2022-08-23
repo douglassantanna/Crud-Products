@@ -6,6 +6,7 @@ namespace products.Domain.Customers.DTOs;
 public class ViewCustomer
 {
     public int Id { get; set; }
+    public double Codigo_cliente_omie { get; set; }
     public string? Email { get; set; }
     public string? Razao_social { get; set; }
     public string? Nome_fantasia { get; set; }
@@ -23,7 +24,7 @@ public class ViewCustomer
     public string? Contribuinte { get; set; }
     public string? Observacao { get; set; }
     public string? Pessoa_fisica { get; set; }
-    public EnderecoEntrega? EnderecoEntrega { get; set; }
+    public List<EnderecoEntrega>? EnderecoEntrega { get; set; }
 }
 
 public static class ViewCustomerExtension
@@ -31,6 +32,8 @@ public static class ViewCustomerExtension
     public static Expression<Func<Customer, ViewCustomer>> ToView() => x => new ViewCustomer
     {
         Id = x.Id,
+        Codigo_cliente_omie = x.Codigo_cliente_omie,
+        Email = x.Email,
         Razao_social = x.Razao_social,
         Nome_fantasia = x.Nome_fantasia,
         Cnpj_cpf = x.Cnpj_cpf,
@@ -46,7 +49,8 @@ public static class ViewCustomerExtension
         Cep = x.Cep,
         Contribuinte = x.Contribuinte,
         Observacao = x.Observacao,
-        Pessoa_fisica = x.Pessoa_fisica
+        Pessoa_fisica = x.Pessoa_fisica,
+        EnderecoEntrega = x.EnderecoEntrega
     };
 }
 

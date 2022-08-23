@@ -22,22 +22,22 @@ public record CreateCustomerCommand(
     string Contribuinte,
     string Observacao,
     string Pessoa_fisica,
-    List<NewShipingAddress> EnderecosEntrega
+    List<NewShippingAddress> EnderecoEntrega
 ) : IRequest<NotificationResult>;
 
-public record NewShipingAddress(
-        string EntEndereco,
-        string EntNumero,
-        string EntComplemento,
-        string EntBairro,
-        string EntCEP,
-        string EntEstado,
-        string EntCidade);
+public record NewShippingAddress(
+        string entEndereco,
+        string entNumero,
+        string entComplemento,
+        string entBairro,
+        string entCEP,
+        string entEstado,
+        string entCidade);
 public class CreateCustomerValidator : AbstractValidator<CreateCustomerCommand>
 {
     public CreateCustomerValidator()
     {
-        CascadeMode = CascadeMode.Stop;
+        ClassLevelCascadeMode = CascadeMode.Stop;
         RuleFor(x => x.Email).EmailAddress().WithMessage("Um {PropertyName} válido deve ser fornecido.");
         RuleFor(x => x.Razao_social).NotNull().NotEmpty().WithMessage("Razão social é obrigatório.");
         RuleFor(x => x.Nome_fantasia).NotNull().NotEmpty().WithMessage("Nome fantasia é obrigatório.");
@@ -54,6 +54,6 @@ public class CreateCustomerValidator : AbstractValidator<CreateCustomerCommand>
         RuleFor(x => x.Contribuinte).NotNull().NotEmpty().Length(1, 1).WithMessage("Campo Contribuinte obrigatório. Escolha 'S' para sim e 'N' para não");
         RuleFor(x => x.Contribuinte).NotNull().NotEmpty().Length(1, 1).WithMessage("Campo Contribuinte obrigatório. Escolha 'S' para sim e 'N' para não");
         RuleFor(x => x.Pessoa_fisica).NotNull().NotEmpty().Length(1, 1).WithMessage("Campo Pessoa Física obrigatório. Escolha 'S' para sim e 'N' para não");
-        RuleFor(e => e.EnderecosEntrega).NotNull().NotEmpty().WithMessage("Necessário informar um endereço para entrega");
+        RuleFor(e => e.EnderecoEntrega).NotNull().NotEmpty().WithMessage("Necessário informar um endereço para entrega");
     }
 }

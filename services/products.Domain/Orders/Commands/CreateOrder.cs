@@ -15,7 +15,7 @@ public class CreateOrderValidator : AbstractValidator<CreateOrderCommand>
 {
     public CreateOrderValidator()
     {
-        CascadeMode = CascadeMode.Stop;
+        ClassLevelCascadeMode = CascadeMode.Stop;
         RuleFor(c => c.CustomerID).NotNull().WithMessage("Um pedido deve conter um cliente");
         RuleForEach(c => c.Itens).NotNull().WithMessage("Um pedido deve conter ao menos um item");
     }
@@ -52,8 +52,8 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Notificati
         _logger.LogInformation("Creating order");
         var customer = _customerRepository.GetById(request.CustomerID);
         var itens = request.Itens.Select(x => new Item(x.Name, x.Price)).ToList();
-        var order = new Order(customer, itens);
-        await _orderRepository.CreateAsync(order);
+        // var order = new Order(customer, itens);
+        // await _orderRepository.CreateAsync(order);
         await _mediator.Publish(new OrderResult() { Result = new("Pedido criado") });
         _logger.LogInformation("Order created");
         return new NotificationResult("Pedido criado");

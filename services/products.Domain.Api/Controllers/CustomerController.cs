@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using product.Domain.Omie.OmieCustomers.Requests;
 using products.Domain.Customers.Commands;
 using products.Domain.Customers.DTOs;
 using products.Domain.Customers.Interfaces;
@@ -23,6 +24,14 @@ namespace products.Domain.Api.Controllers
             _mediator = mediator;
             _db = db;
         }
+        [HttpPost("get-customer")]
+        public async Task<IActionResult> Get(OmieGetCustomerRequest customer)
+        {
+            var result = await _mediator.Send(customer);
+            if (!result.Success) return BadRequest(result);
+            return Ok(result);
+        }
+
         [HttpGet]
         public ActionResult<Pagination<ViewCustomer>> GetAll(
             [FromQuery] int pageIndex = 0,
@@ -41,7 +50,7 @@ namespace products.Domain.Api.Controllers
             return new Pagination<ViewCustomer>(query, pageIndex, pageSize);
         }
         [HttpGet("{id}")]
-        public IActionResult GetById(int id) => Ok(_db.Customers.FirstOrDefault(x => x.Id == id));
+        public IActionResult GetById(int id) => Ok(_CustomerRepository.GetCustomerWithAddress(id));
         [HttpPost]
         public async Task<IActionResult> Create(CreateCustomerCommand customer)
         {
@@ -52,7 +61,7 @@ namespace products.Domain.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, UpdateCustomerCommand customer)
         {
-            if (id != customer.Id) return BadRequest(new NotificationResult("ID do Customer invalido.", false, new { customerId = id, customer }));
+            if (id != customer.Id) return BadRequest(new NotificationResult("Id da rota diferente da requisição.", false, new { customerId = id, customer }));
             var result = await _mediator.Send(customer);
             if (!result.Success) return BadRequest(result);
             return NoContent();
