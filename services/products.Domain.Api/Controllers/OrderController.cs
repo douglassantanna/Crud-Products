@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using products.Domain.Infra.Context;
 using products.Domain.Itens.DTOs;
 using products.Domain.Orders.Commands;
-using products.Domain.Orders.Interfaces;
+using products.Domain.Orders.Contracts;
 using products.Domain.Shared;
 
 namespace products.Domain.Api.Controllers

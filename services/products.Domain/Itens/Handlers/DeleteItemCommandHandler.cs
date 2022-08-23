@@ -1,6 +1,6 @@
 using MediatR;
 using products.Domain.Itens.Commands;
-using products.Domain.Itens.Interfaces;
+using products.Domain.Itens.Contracts;
 using products.Domain.Shared;
 
 namespace products.Domain.Itens.Handlers
@@ -17,7 +17,7 @@ namespace products.Domain.Itens.Handlers
         public async Task<NotificationResult> Handle(DeleteItemCommand request, CancellationToken cancellationToken)
         {
             var item = _repository.GetById(request.Id);
-            if(item == null) return new NotificationResult("Item invalido", false);
+            if (item == null) return new NotificationResult("Item invalido", false);
             await _repository.DeleteAsync(item);
             return new NotificationResult("Item excluido");
         }

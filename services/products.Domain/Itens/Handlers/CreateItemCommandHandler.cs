@@ -1,7 +1,7 @@
 using MediatR;
 using products.Domain.Itens.Commands;
 using products.Domain.Itens.Entities;
-using products.Domain.Itens.Interfaces;
+using products.Domain.Itens.Contracts;
 using products.Domain.Shared;
 
 namespace products.Domain.Itens.Handlers

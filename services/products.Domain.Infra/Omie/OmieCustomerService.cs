@@ -2,7 +2,7 @@ using Flurl;
 using Flurl.Http;
 using Microsoft.Extensions.Logging;
 using product.Domain.Omie.OmieCustomers.Results;
-using products.Domain.Customers.Interfaces;
+using products.Domain.Customers.Contracts;
 using products.Domain.Omie;
 using products.Domain.Omie.OmieCustomers;
 using products.Domain.Shared;

@@ -1,7 +1,7 @@
 using products.Domain.Itens.Entities;
 using products.Domain.Shared;
 
-namespace products.Domain.Itens.Interfaces;
+namespace products.Domain.Itens.Contracts;
 
 public interface IItemRepository
 {

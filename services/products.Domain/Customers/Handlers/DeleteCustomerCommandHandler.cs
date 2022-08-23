@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using product.Domain.Omie.OmieCustomers.Requests;
 using products.Domain.Customers.Commands;
-using products.Domain.Customers.Interfaces;
+using products.Domain.Customers.Contracts;
 using products.Domain.Shared;
 
 namespace products.Domain.Customers.Handlers;

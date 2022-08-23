@@ -1,6 +1,6 @@
 using products.Domain.Customers.Entities;
 
-namespace products.Domain.Customers.Interfaces;
+namespace products.Domain.Customers.Contracts;
 
 public interface ICustomerRepository
 {

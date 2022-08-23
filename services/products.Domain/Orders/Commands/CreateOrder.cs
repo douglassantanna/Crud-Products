@@ -1,11 +1,10 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using products.Domain.Customers.Interfaces;
+using products.Domain.Customers.Contracts;
 using products.Domain.Itens.Entities;
-using products.Domain.Orders.Entities;
 using products.Domain.Orders.Events;
-using products.Domain.Orders.Interfaces;
+using products.Domain.Orders.Contracts;
 using products.Domain.Shared;
 
 namespace products.Domain.Orders.Commands;

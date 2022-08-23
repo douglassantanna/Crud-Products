@@ -1,6 +1,6 @@
 using products.Domain.Carts.Entities;
 
-namespace products.Domain.Carts.Interfaces;
+namespace products.Domain.Carts.Contracts;
 
 public interface ICartRepository
 {

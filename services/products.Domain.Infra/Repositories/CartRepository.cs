@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using products.Domain.Carts.Contracts;
 using products.Domain.Carts.Entities;
-using products.Domain.Carts.Interfaces;
 using products.Domain.Infra.Context;
 
-namespace products.Domain.Infra.Repositories.CartRepo;
+namespace products.Domain.Infra.Repositories;
 public class CartRepository : ICartRepository
 {
     private readonly AppDbContext _db;

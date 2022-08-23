@@ -1,7 +1,7 @@
 using products.Domain.Orders.Entities;
 using products.Domain.Shared;
 
-namespace products.Domain.Orders.Interfaces;
+namespace products.Domain.Orders.Contracts;
 public interface IOrderRepository
 {
     Task<List<Order>> GetAllAsync();

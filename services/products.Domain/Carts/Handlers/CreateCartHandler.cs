@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using products.Domain.Carts.Commands;
-using products.Domain.Carts.Interfaces;
-using products.Domain.Itens.Interfaces;
+using products.Domain.Carts.Contracts;
+using products.Domain.Itens.Contracts;
 using products.Domain.Shared;
 
 namespace products.Domain.Carts;

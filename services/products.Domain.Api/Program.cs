@@ -1,5 +1,7 @@
-using System;
+using System.Text;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using products.Domain.Infra.Context;
 using products.Domain.Omie;
 using products.Domain.Shared;
@@ -23,18 +25,31 @@ builder.Services.AddSingleton((Func<IServiceProvider, OmieConfigurations>)(x =>
                 app_key,
                 app_secret);
 }));
-// {
-//     OmieConfigurations config = new OmieConfigurations();
-//     config.OMIE_URL = Environment.GetEnvironmentVariable("OmieSettings:OMIE_URL");
-//     config.APP_KEY = Environment.GetEnvironmentVariable("OmieSettings:OMIE_APP_KEY");
-//     config.APP_SECRET = Environment.GetEnvironmentVariable("OmieSettings:OMIE_APP_SECRET");
-//     return config;
-// });
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddRepositories();
 builder.Services.AddEntityFramework(builder.Configuration);
 builder.Services.AddValidators();
 
+var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("Auth:Secret").Value);
+builder.Services.AddAuthentication(
+    a =>
+    {
+        a.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        a.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }
+).AddJwtBearer(
+    j =>
+    {
+        j.RequireHttpsMetadata = false;
+        j.SaveToken = true;
+        j.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

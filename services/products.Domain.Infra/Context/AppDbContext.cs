@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using products.Domain.Auth.Entities;
 using products.Domain.Carts.Entities;
 using products.Domain.Customers.Entities;
 using products.Domain.Itens.Entities;
@@ -16,6 +17,7 @@ public class AppDbContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<EnderecoEntrega>? EnderecosEntrega { get; set; }
     public DbSet<Cart> Carts { get; set; }
+    public DbSet<User> Users { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Item>()
