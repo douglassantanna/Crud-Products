@@ -16,8 +16,8 @@ public class AppDbContext : DbContext
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<EnderecoEntrega>? EnderecosEntrega { get; set; }
-    public DbSet<CartItem> CartItem { get; set; }
-    public DbSet<CartHeader> CartHeader { get; set; }
+    public DbSet<CartItem> CartItems { get; set; }
+    public DbSet<CartHeader> CartHeaders { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Category> Categories { get; set; }
     protected override void OnModelCreating(ModelBuilder mb)

@@ -26,8 +26,7 @@ public class CreateCartHandler : IRequestHandler<CreateCartCommand, Notification
 
         if (request is null)
             return new("Request cant be null", false);
-
-        // var cart = await _cartRepository.AddItemToCart(request.UserID, request.ItemId, request.Quantity);
+        // var cart = await _cartRepository.c(request.UserID, request.ItemId, request.Quantity);
         return new("Cart created.");
     }
 }

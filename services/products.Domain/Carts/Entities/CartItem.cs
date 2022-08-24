@@ -9,7 +9,4 @@ public class CartItem : Entity
     public int ItemId { get; set; }
     public int CartHeaderId { get; set; }
     public Item Item { get; set; }
-    public CartHeader CartHeader { get; set; } = new CartHeader();
-
-
 }
