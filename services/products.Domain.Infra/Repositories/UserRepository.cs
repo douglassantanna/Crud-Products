@@ -33,8 +33,8 @@ public class UserRepository : IUserRepository
 
     public string HashPassword(string password)
     {
-        var hash = BC.HashPassword(password);
-        return hash;
+        var salt = BC.GenerateSalt();
+        return BC.HashPassword(password, salt);
     }
 
     public async Task UpdateAsync(User user)

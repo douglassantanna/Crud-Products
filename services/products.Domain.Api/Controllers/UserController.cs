@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using products.Domain.Auth.Commands;
+using products.Domain.Auth.Entities;
 
 namespace products.Domain.Api.Controllers;
 [ApiController]
@@ -21,5 +22,11 @@ public class UserController : ControllerBase
         var result = await _mediator.Send(command);
         if (!result.Success) return BadRequest(result);
         return Ok(result);
+    }
+    [HttpGet("{id}")]
+    public ActionResult<User> GetUserById(int id)
+    {
+        var user = _userRepository.GetById(id);
+        return Ok(user);
     }
 }

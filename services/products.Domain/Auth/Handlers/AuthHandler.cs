@@ -20,9 +20,11 @@ public class AuthHandler : IRequestHandler<AuthCommand, NotificationResult>
 
     public async Task<NotificationResult> Handle(AuthCommand request, CancellationToken cancellationToken)
     {
-        var user = _userRepository.GetByEmail(request.User.Email);
+        var user = _userRepository.GetByEmail(request.Email);
+        if (user is null) return new("Invalid user", false);
         var isValidUser = await _authRepository.Authenticate(user);
-        if (!isValidUser) return new("Invalid e-mail or password", false);
-        return new("Valid user");
+        if (isValidUser) return new("Valid user");
+        return new("Invalid password", false);
+
     }
 }

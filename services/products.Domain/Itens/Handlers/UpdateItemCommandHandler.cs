@@ -17,12 +17,11 @@ namespace products.Domain.Itens.Handlers
         public async Task<NotificationResult> Handle(UpdateItemCommand request, CancellationToken cancellationToken)
         {
             var item = _repository.GetById(request.Id);
-            if (item == null) return new NotificationResult("Item invalido", false);
-            item.UpdateName(request.Name);
-            item.UpdatePrice(request.Price);
+            if (item == null) return new NotificationResult("Invalid item", false);
+            item.UpdateItem(request.Name, request.Price, request.Category);
             item.UpdatedAt();
             await _repository.UpdateAsync(item);
-            return new NotificationResult("Item atualizado");
+            return new NotificationResult("Item updated");
         }
     }
 }

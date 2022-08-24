@@ -17,7 +17,7 @@ public class AuthRepository : IAuthRepository
     public async Task<bool> Authenticate(User user)
     {
         var account = await _db.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
-        if (account is null || !BC.Verify(user.Password, account.Password)) return false;
-        return true;
+        if (account is null) return false;
+        return BC.Verify(user.Password, account.Password);
     }
 }

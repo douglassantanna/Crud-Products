@@ -50,7 +50,7 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Notificati
 
         _logger.LogInformation("Creating order");
         var customer = _customerRepository.GetById(request.CustomerID);
-        var itens = request.Itens.Select(x => new Item(x.Name, x.Price)).ToList();
+        var itens = request.Itens.Select(x => new Item(x.Name, x.Price, x.Category)).ToList();
         // var order = new Order(customer, itens);
         // await _orderRepository.CreateAsync(order);
         await _mediator.Publish(new OrderResult() { Result = new("Pedido criado") });
